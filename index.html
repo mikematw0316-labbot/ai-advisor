@@ -46,6 +46,26 @@ html{scroll-behavior:smooth;}
 .text-glow{text-shadow:0 0 28px rgba(129,236,255,0.5);}
 .text-glow-sm{text-shadow:0 0 14px rgba(129,236,255,0.4);}
 
+/* Lab tool card */
+.lab-card{
+  display:flex;flex-direction:column;gap:10px;padding:20px;border-radius:12px;
+  background:rgba(20,26,29,0.6);
+  border:1px solid rgba(129,236,255,0.07);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  transition:border-color .2s,transform .2s,box-shadow .2s;
+}
+.lab-card:hover{
+  border-color:rgba(129,236,255,0.18);
+  transform:translateY(-2px);
+  box-shadow:0 8px 32px rgba(129,236,255,0.06);
+}
+.lab-icon{
+  width:36px;height:36px;border-radius:8px;
+  background:rgba(129,236,255,0.08);
+  display:flex;align-items:center;justify-content:center;
+  color:#81ecff;font-size:18px;flex-shrink:0;
+}
+
 /* Scan-line overlay */
 .scanlines::after{
   content:'';position:absolute;inset:0;
@@ -130,7 +150,6 @@ html{scroll-behavior:smooth;}
     <div class="hidden md:flex items-center gap-10">
       <a href="#services" class="font-mono text-[11px] uppercase tracking-widest text-primary border-b border-primary/30 hover:border-primary pb-0.5 transition-colors">服務諮詢</a>
       <a href="#lab"      class="font-mono text-[11px] uppercase tracking-widest text-zinc-400 hover:text-primary transition-colors">AI 實驗室</a>
-      <a href="#about"    class="font-mono text-[11px] uppercase tracking-widest text-zinc-400 hover:text-primary transition-colors">關於我</a>
     </div>
     <div class="flex items-center gap-3">
       <a href="https://forms.gle/aTzTSBdJBxVNsnoG9" target="_blank"
@@ -145,7 +164,6 @@ html{scroll-behavior:smooth;}
   <div id="mob-menu" class="flex-col px-5 pb-4 md:hidden border-t border-white/5">
     <a href="#services" onclick="toggleMob()" class="block py-3 font-mono text-sm text-on-surface-variant hover:text-primary transition-colors">服務諮詢</a>
     <a href="#lab"      onclick="toggleMob()" class="block py-3 font-mono text-sm text-on-surface-variant hover:text-primary transition-colors">AI 實驗室</a>
-    <a href="#about"    onclick="toggleMob()" class="block py-3 font-mono text-sm text-on-surface-variant hover:text-primary transition-colors">關於我</a>
   </div>
 </nav>
 
@@ -167,8 +185,7 @@ html{scroll-behavior:smooth;}
         </div>
 
         <h1 class="font-headline font-bold leading-[1.05] mb-6">
-          <span class="block text-4xl sm:text-5xl md:text-6xl text-white">麥克馬 Mike Ma</span>
-          <span class="block text-4xl sm:text-5xl md:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-dim text-glow mt-1">AI 顧問與策略師</span>
+          <span class="block text-4xl sm:text-5xl md:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-dim text-glow">AI 顧問與策略師</span>
         </h1>
 
         <p class="text-on-surface-variant text-base md:text-lg leading-relaxed max-w-lg mb-10">
@@ -234,13 +251,13 @@ html{scroll-behavior:smooth;}
 </section>
 
 <!-- ══════════════════ SERVICES ══════════════════ -->
-<section class="py-24 md:py-32 px-6 md:px-8" id="services">
+<section class="py-16 md:py-20 px-6 md:px-8" id="services">
   <div class="max-w-7xl mx-auto">
 
     <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-14 gap-4 reveal">
       <div>
         <p class="font-mono text-[10px] text-primary/50 tracking-[0.5em] uppercase mb-3">CORE COMPETENCIES</p>
-        <h2 class="font-headline text-3xl md:text-4xl font-bold">核心服務範疇</h2>
+        <h2 class="font-headline text-3xl md:text-4xl font-bold text-white">核心服務範疇</h2>
       </div>
       <p class="font-mono text-[9px] text-zinc-600 tracking-widest uppercase text-right max-w-[200px] leading-loose hidden md:block">
         ARCHITECTING THE FUTURE<br>THROUGH AI INTEGRATION
@@ -352,180 +369,147 @@ html{scroll-behavior:smooth;}
 </section>
 
 <!-- ══════════════════ AI LAB ══════════════════ -->
-<section class="py-24 md:py-32 px-6 md:px-8 relative" id="lab" style="background:linear-gradient(180deg,#000 0%,#050b0e 100%);">
+<section class="py-16 md:py-20 px-6 md:px-8 relative" id="lab" style="background:linear-gradient(180deg,#000 0%,#050b0e 100%);">
   <div class="absolute inset-0 pointer-events-none" style="background-image:linear-gradient(rgba(129,236,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(129,236,255,0.02) 1px,transparent 1px);background-size:80px 80px;"></div>
   <div class="max-w-7xl mx-auto relative z-10">
 
-    <div class="text-center mb-16 reveal">
-      <p class="font-mono text-[10px] text-primary/50 tracking-[0.5em] uppercase mb-5">EXPERIMENTATION NODE</p>
-      <h2 class="font-headline text-3xl md:text-5xl font-bold mb-4">AI 實驗室</h2>
-      <div class="glow-line w-20 mx-auto mb-6"></div>
-      <p class="text-on-surface-variant text-sm md:text-base max-w-lg mx-auto">真實 AI 產出工具分享，親身體驗 AI 帶來的生產力變革</p>
+    <!-- Section Header -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-4 reveal">
+      <div>
+        <p class="font-mono text-[10px] text-primary/50 tracking-[0.5em] uppercase mb-3">AI TOOL LAB</p>
+        <h2 class="font-headline text-3xl md:text-4xl font-bold text-white">實戰 AI 工具箱</h2>
+        <p class="text-on-surface-variant text-sm mt-3 max-w-md">精選 AI 應用工具，可直接使用，零門檻體驗生產力升級</p>
+      </div>
+      <p class="font-mono text-[9px] text-zinc-600 tracking-widest uppercase text-right max-w-[180px] leading-loose hidden md:block">
+        LIVE TOOLS<br>BUILT &amp; DEPLOYED
+      </p>
     </div>
 
-    <!-- 🚀 AI 智慧生成與優化 -->
-    <div class="mb-12 reveal">
-      <div class="flex items-center gap-3 mb-5">
-        <div class="status-dot"></div>
-        <span class="font-mono text-[10px] text-zinc-500 tracking-widest">01 /</span>
-        <span class="font-headline text-base font-bold">🚀 AI 智慧生成與優化</span>
+    <!-- Category 01: AI 生成工具 -->
+    <div class="mb-10 reveal">
+      <div class="flex items-center gap-4 mb-6">
+        <div class="w-1 h-5 rounded-full bg-primary" style="box-shadow:0 0 10px #81ecff;"></div>
+        <span class="font-headline text-sm font-semibold text-white uppercase tracking-wide">AI 智慧生成</span>
+        <div class="flex-1 h-px bg-white/5"></div>
+        <span class="font-mono text-[9px] text-zinc-600 uppercase tracking-widest">01</span>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
 
         <a href="https://ai.studio/apps/drive/1jJc70AxEZp-ai1JDqGcaa8rjR5kq7paP?fullscreenApplet=true" target="_blank"
-          class="glass glow-border lift rounded-xl p-5 flex flex-col gap-3 group">
-          <div class="flex items-start justify-between">
-            <span class="font-mono text-[9px] text-zinc-600">01:01</span>
-            <span class="material-symbols-outlined text-sm text-zinc-600 group-hover:text-primary transition-colors">open_in_new</span>
+          class="lab-card group">
+          <div class="lab-icon"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">work</span></div>
+          <div class="flex-1">
+            <h4 class="font-headline font-bold text-sm text-white mb-1">LinkedIn 履歷職涯推手</h4>
+            <p class="text-on-surface-variant text-[11px] leading-relaxed">上傳 PDF，AI 深度重構職涯敘事，強化個人競爭力</p>
           </div>
-          <h4 class="font-headline font-bold text-sm leading-snug">LinkedIn 履歷職涯推手</h4>
-          <div class="font-mono text-[10px] space-y-1 flex-1">
-            <div class="term-line text-zinc-500">upload linkedin_export.pdf</div>
-            <div class="term-ok text-green-500/70">AI 重構履歷完成</div>
-            <div class="term-line text-zinc-500">競爭力分析中...</div>
+          <div class="flex items-center justify-between mt-3 pt-3 border-t border-white/5">
+            <span class="font-mono text-[10px] text-primary group-hover:text-primary-container transition-colors">立即體驗 →</span>
+            <span class="material-symbols-outlined text-xs text-zinc-600 group-hover:text-primary transition-colors">open_in_new</span>
           </div>
-          <span class="font-mono text-[10px] text-primary group-hover:gap-2 transition-all">立即體驗 →</span>
         </a>
 
         <a href="https://ai.studio/apps/drive/1b-l0IlkS9TJlxHFO5fHBE1dXf75XoCJR?fullscreenApplet=true" target="_blank"
-          class="glass glow-border lift rounded-xl p-5 flex flex-col gap-3 group">
-          <div class="flex items-start justify-between">
-            <span class="font-mono text-[9px] text-zinc-600">01:02</span>
-            <span class="material-symbols-outlined text-sm text-zinc-600 group-hover:text-primary transition-colors">open_in_new</span>
+          class="lab-card group">
+          <div class="lab-icon"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">record_voice_over</span></div>
+          <div class="flex-1">
+            <h4 class="font-headline font-bold text-sm text-white mb-1">AI 文字轉語音</h4>
+            <p class="text-on-surface-variant text-[11px] leading-relaxed">輸入文字，自動生成自然中文語音，多種語調可選</p>
           </div>
-          <h4 class="font-headline font-bold text-sm leading-snug">AI 文字轉語音工具</h4>
-          <div class="font-mono text-[10px] space-y-1 flex-1">
-            <div class="term-line text-zinc-500">input text --lang zh-TW</div>
-            <div class="term-ok text-green-500/70">自然語音生成完成</div>
-            <div class="term-line text-zinc-500">語調選擇 active...</div>
+          <div class="flex items-center justify-between mt-3 pt-3 border-t border-white/5">
+            <span class="font-mono text-[10px] text-primary group-hover:text-primary-container transition-colors">立即體驗 →</span>
+            <span class="material-symbols-outlined text-xs text-zinc-600 group-hover:text-primary transition-colors">open_in_new</span>
           </div>
-          <span class="font-mono text-[10px] text-primary">立即體驗 →</span>
         </a>
 
         <a href="https://ai.studio/apps/drive/1nT9hR08z-Aayu-glchcI_eVFJgX1I1rT?fullscreenApplet=true" target="_blank"
-          class="glass glow-border lift rounded-xl p-5 flex flex-col gap-3 group">
-          <div class="flex items-start justify-between">
-            <span class="font-mono text-[9px] text-zinc-600">01:03</span>
-            <span class="material-symbols-outlined text-sm text-zinc-600 group-hover:text-primary transition-colors">open_in_new</span>
+          class="lab-card group">
+          <div class="lab-icon"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">crop</span></div>
+          <div class="flex-1">
+            <h4 class="font-headline font-bold text-sm text-white mb-1">圖片批次尺寸再製</h4>
+            <p class="text-on-surface-variant text-[11px] leading-relaxed">主體智慧識別、自動裁切，批次輸出各平台所需比例</p>
           </div>
-          <h4 class="font-headline font-bold text-sm leading-snug">AI 圖片尺寸批次再製</h4>
-          <div class="font-mono text-[10px] space-y-1 flex-1">
-            <div class="term-line text-zinc-500">batch_resize --ratio 1:1</div>
-            <div class="term-ok text-green-500/70">主體識別完成</div>
-            <div class="term-line text-zinc-500">自動裁切輸出中...</div>
+          <div class="flex items-center justify-between mt-3 pt-3 border-t border-white/5">
+            <span class="font-mono text-[10px] text-primary group-hover:text-primary-container transition-colors">立即體驗 →</span>
+            <span class="material-symbols-outlined text-xs text-zinc-600 group-hover:text-primary transition-colors">open_in_new</span>
           </div>
-          <span class="font-mono text-[10px] text-primary">立即體驗 →</span>
         </a>
 
         <a href="https://ai.studio/apps/drive/1mVoqT21wIQeiZIgaYdOyHxT6nssg5BaB?fullscreenApplet=true" target="_blank"
-          class="glass glow-border lift rounded-xl p-5 flex flex-col gap-3 group">
-          <div class="flex items-start justify-between">
-            <span class="font-mono text-[9px] text-zinc-600">01:04</span>
-            <span class="material-symbols-outlined text-sm text-zinc-600 group-hover:text-primary transition-colors">open_in_new</span>
+          class="lab-card group">
+          <div class="lab-icon"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">label</span></div>
+          <div class="flex-1">
+            <h4 class="font-headline font-bold text-sm text-white mb-1">圖片智慧標籤生成</h4>
+            <p class="text-on-surface-variant text-[11px] leading-relaxed">批次分析圖庫，自動產生精準 SEO 標籤，提升曝光效率</p>
           </div>
-          <h4 class="font-headline font-bold text-sm leading-snug">AI 圖片智慧標籤</h4>
-          <div class="font-mono text-[10px] space-y-1 flex-1">
-            <div class="term-line text-zinc-500">auto_tag --batch images/</div>
-            <div class="term-ok text-green-500/70">精準 Tag 生成完成</div>
-            <div class="term-line text-zinc-500">圖庫索引更新中...</div>
+          <div class="flex items-center justify-between mt-3 pt-3 border-t border-white/5">
+            <span class="font-mono text-[10px] text-primary group-hover:text-primary-container transition-colors">立即體驗 →</span>
+            <span class="material-symbols-outlined text-xs text-zinc-600 group-hover:text-primary transition-colors">open_in_new</span>
           </div>
-          <span class="font-mono text-[10px] text-primary">立即體驗 →</span>
         </a>
 
       </div>
     </div>
 
-    <!-- 🛠 高效生產力自動化 -->
-    <div class="mb-12 reveal">
-      <div class="flex items-center gap-3 mb-5">
-        <div class="status-dot"></div>
-        <span class="font-mono text-[10px] text-zinc-500 tracking-widest">02 /</span>
-        <span class="font-headline text-base font-bold">🛠 高效生產力自動化</span>
+    <!-- Category 02: 自動化・社群・娛樂 -->
+    <div class="reveal">
+      <div class="flex items-center gap-4 mb-6">
+        <div class="w-1 h-5 rounded-full" style="background:linear-gradient(180deg,#81ecff,#00e3fd);box-shadow:0 0 10px #81ecff;"></div>
+        <span class="font-headline text-sm font-semibold text-white uppercase tracking-wide">自動化・社群・創意娛樂</span>
+        <div class="flex-1 h-px bg-white/5"></div>
+        <span class="font-mono text-[9px] text-zinc-600 uppercase tracking-widest">02</span>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
 
         <a href="https://ai.studio/apps/drive/1X0zv-FX_MmV__9NCAEGv0e1STRMaoiRN?fullscreenApplet=true" target="_blank"
-          class="glass glow-border lift rounded-xl p-5 flex flex-col gap-3 group" style="border-left:2px solid rgba(129,236,255,0.25);">
-          <div class="flex items-start justify-between">
-            <span class="font-mono text-[9px] text-zinc-600">02:01</span>
-            <span class="material-symbols-outlined text-sm text-zinc-600 group-hover:text-primary transition-colors">open_in_new</span>
+          class="lab-card group">
+          <div class="lab-icon"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">table</span></div>
+          <div class="flex-1">
+            <h4 class="font-headline font-bold text-sm text-white mb-1">Excel 圖片批次下載器</h4>
+            <p class="text-on-surface-variant text-[11px] leading-relaxed">拖曳 Excel 檔案，自動擷取表內所有圖片連結並批次下載</p>
           </div>
-          <h4 class="font-headline font-bold text-sm leading-snug">Excel 圖片批次下載器</h4>
-          <div class="font-mono text-[10px] space-y-1 flex-1">
-            <div class="term-line text-zinc-500">import excel --drag-drop</div>
-            <div class="term-ok text-green-500/70">批次下載任務開始</div>
-            <div class="term-warn text-amber-500/70">效率提升 100%</div>
+          <div class="flex items-center justify-between mt-3 pt-3 border-t border-white/5">
+            <span class="font-mono text-[10px] text-primary group-hover:text-primary-container transition-colors">立即體驗 →</span>
+            <span class="material-symbols-outlined text-xs text-zinc-600 group-hover:text-primary transition-colors">open_in_new</span>
           </div>
-          <span class="font-mono text-[10px] text-primary">立即體驗 →</span>
         </a>
-
-      </div>
-    </div>
-
-    <!-- 🎨 社群經營與設計 -->
-    <div class="mb-12 reveal">
-      <div class="flex items-center gap-3 mb-5">
-        <div class="status-dot"></div>
-        <span class="font-mono text-[10px] text-zinc-500 tracking-widest">03 /</span>
-        <span class="font-headline text-base font-bold">🎨 社群經營與設計</span>
-      </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
 
         <a href="https://mikematw0316-labbot.github.io/carousel-tool/" target="_blank"
-          class="glass glow-border lift rounded-xl p-5 flex flex-col gap-3 group">
-          <div class="flex items-start justify-between">
-            <span class="font-mono text-[9px] text-zinc-600">03:01</span>
-            <span class="material-symbols-outlined text-sm text-zinc-600 group-hover:text-primary transition-colors">open_in_new</span>
+          class="lab-card group">
+          <div class="lab-icon"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">view_carousel</span></div>
+          <div class="flex-1">
+            <h4 class="font-headline font-bold text-sm text-white mb-1">FB / IG 社群製圖神器</h4>
+            <p class="text-on-surface-variant text-[11px] leading-relaxed">一鍵套版、智慧排版，快速生成社群貼文視覺素材</p>
           </div>
-          <h4 class="font-headline font-bold text-sm leading-snug">FB / IG 社群製圖神器</h4>
-          <div class="font-mono text-[10px] space-y-1 flex-1">
-            <div class="term-line text-zinc-500">SELECT template --style auto</div>
-            <div class="term-ok text-green-500/70">視覺排版生成完成</div>
-            <div class="term-line text-zinc-500">貼文發布就緒...</div>
+          <div class="flex items-center justify-between mt-3 pt-3 border-t border-white/5">
+            <span class="font-mono text-[10px] text-primary group-hover:text-primary-container transition-colors">立即體驗 →</span>
+            <span class="material-symbols-outlined text-xs text-zinc-600 group-hover:text-primary transition-colors">open_in_new</span>
           </div>
-          <span class="font-mono text-[10px] text-primary">立即體驗 →</span>
         </a>
 
-      </div>
-    </div>
-
-    <!-- 🎮 創意遊戲娛樂 -->
-    <div class="reveal">
-      <div class="flex items-center gap-3 mb-5">
-        <div class="status-dot"></div>
-        <span class="font-mono text-[10px] text-zinc-500 tracking-widest">04 /</span>
-        <span class="font-headline text-base font-bold">🎮 創意遊戲娛樂</span>
-      </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-
         <a href="https://mikematw0316-labbot.github.io/territory-game/" target="_blank"
-          class="glass glow-border lift rounded-xl p-5 flex flex-col gap-3 group">
-          <div class="flex items-start justify-between">
-            <span class="font-mono text-[9px] text-zinc-600">04:01</span>
-            <span class="material-symbols-outlined text-sm text-zinc-600 group-hover:text-primary transition-colors">open_in_new</span>
+          class="lab-card group">
+          <div class="lab-icon"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">map</span></div>
+          <div class="flex-1">
+            <h4 class="font-headline font-bold text-sm text-white mb-1">佔地風雲：多人對決</h4>
+            <p class="text-on-surface-variant text-[11px] leading-relaxed">即時多人預測競技，搶佔領地，最強策略者制霸全場</p>
           </div>
-          <h4 class="font-headline font-bold text-sm leading-snug">佔地風雲：多人對決</h4>
-          <div class="font-mono text-[10px] space-y-1 flex-1">
-            <div class="term-line text-zinc-500">CONNECT players --max 8</div>
-            <div class="term-ok text-green-500/70">領地擴張引擎 active</div>
-            <div class="term-line text-zinc-500">預測系統 online...</div>
+          <div class="flex items-center justify-between mt-3 pt-3 border-t border-white/5">
+            <span class="font-mono text-[10px] text-primary group-hover:text-primary-container transition-colors">立即體驗 →</span>
+            <span class="material-symbols-outlined text-xs text-zinc-600 group-hover:text-primary transition-colors">open_in_new</span>
           </div>
-          <span class="font-mono text-[10px] text-primary">立即體驗 →</span>
         </a>
 
         <a href="https://dungeon-react-production.up.railway.app" target="_blank"
-          class="glass glow-border lift rounded-xl p-5 flex flex-col gap-3 group">
-          <div class="flex items-start justify-between">
-            <span class="font-mono text-[9px] text-zinc-600">04:02</span>
-            <span class="material-symbols-outlined text-sm text-zinc-600 group-hover:text-primary transition-colors">open_in_new</span>
+          class="lab-card group">
+          <div class="lab-icon"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">swords</span></div>
+          <div class="flex-1">
+            <h4 class="font-headline font-bold text-sm text-white mb-1">地城魔王反攻</h4>
+            <p class="text-on-surface-variant text-[11px] leading-relaxed">D&D 骰子引擎驅動，挑戰英雄、征服地城，全球排行榜對決</p>
           </div>
-          <h4 class="font-headline font-bold text-sm leading-snug">地城魔王反攻：終結英雄傳說</h4>
-          <div class="font-mono text-[10px] space-y-1 flex-1">
-            <div class="term-line text-zinc-500">GENERATE world.map</div>
-            <div class="term-ok text-green-500/70">D&D 骰子引擎 active</div>
-            <div class="term-line text-zinc-500">全球排行榜 online...</div>
+          <div class="flex items-center justify-between mt-3 pt-3 border-t border-white/5">
+            <span class="font-mono text-[10px] text-primary group-hover:text-primary-container transition-colors">立即體驗 →</span>
+            <span class="material-symbols-outlined text-xs text-zinc-600 group-hover:text-primary transition-colors">open_in_new</span>
           </div>
-          <span class="font-mono text-[10px] text-primary">立即體驗 →</span>
         </a>
 
       </div>
@@ -534,61 +518,9 @@ html{scroll-behavior:smooth;}
   </div>
 </section>
 
-<!-- ══════════════════ ABOUT ══════════════════ -->
-<section class="py-24 md:py-36 px-6 md:px-8 max-w-7xl mx-auto overflow-hidden" id="about">
-  <div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
-    <div class="w-full lg:w-2/5 flex-shrink-0 reveal">
-      <div class="relative max-w-sm mx-auto lg:max-w-none">
-        <div class="rounded-2xl overflow-hidden aspect-[4/5] bg-surface-container-high" style="border:1px solid rgba(129,236,255,0.1);">
-          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBS3jXig_n3-YmnubE0A0hxC3l0Ox0SV-OKZUwI9OhG6_kWJJpruihPmNGX_7f3qqYpil8BFJJ9-6DAWdbBPsT-BBthtZtZgJKGrLbhlosh0IHT39Gadx9-ioMlkbBFUSCfatEdd4RQfHdwPDE0TIQJaOrBZ6s3Yd5UIG1BNQ1J4k8dq9ldgKrMUtGJIs7j-2iOUExTnePU9DHsnLu7_iH-DYmuz46C9pG_8Cj2zlN7M2sBGyJ56osefsZ5AVkF2ByZ8u9DTiXqkVpp"
-            alt="Mike Ma 專業形象照" class="w-full h-full object-cover">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-        </div>
-        <div class="absolute -top-4 -right-4 w-24 h-24 rounded-full border border-primary/15 hidden lg:block"></div>
-        <div class="absolute -bottom-4 -left-4 w-16 h-16 rounded-full border border-primary/10 hidden lg:block"></div>
-      </div>
-    </div>
-    <div class="w-full lg:w-3/5 reveal">
-      <p class="font-mono text-[10px] tracking-[0.5em] text-primary mb-5 uppercase">EXPERTISE &amp; VISION</p>
-      <h2 class="font-headline text-3xl md:text-5xl font-bold mb-6 leading-tight">
-        擅長運用 <span class="text-primary text-glow-sm">AI 技術</span><br>滿足您的商業策略
-      </h2>
-      <p class="text-on-surface-variant leading-relaxed mb-8 text-sm md:text-base">
-        專注於 AI 實施與自動化工作流，協助個人與企業將 AI 技術轉化為真實、可衡量的商業成果。無論是生成式 AI 應用、NotebookLM 深度整合，還是工作流自動化，都能提供完整的策略規劃與執行落地。
-      </p>
-      <!-- Skills -->
-      <div class="space-y-3 mb-8">
-        <div>
-          <div class="flex justify-between font-mono text-[10px] text-zinc-500 mb-1"><span>生成式 AI 應用</span><span>95%</span></div>
-          <div class="h-px bg-surface-variant/80 rounded-full overflow-hidden">
-            <div class="h-full bg-gradient-to-r from-primary to-primary-dim rounded-full" style="width:95%;box-shadow:0 0 8px #81ecff;"></div>
-          </div>
-        </div>
-        <div>
-          <div class="flex justify-between font-mono text-[10px] text-zinc-500 mb-1"><span>工作流自動化</span><span>90%</span></div>
-          <div class="h-px bg-surface-variant/80 rounded-full overflow-hidden">
-            <div class="h-full bg-gradient-to-r from-primary to-primary-dim rounded-full" style="width:90%;box-shadow:0 0 8px #81ecff;"></div>
-          </div>
-        </div>
-        <div>
-          <div class="flex justify-between font-mono text-[10px] text-zinc-500 mb-1"><span>策略規劃與落地</span><span>88%</span></div>
-          <div class="h-px bg-surface-variant/80 rounded-full overflow-hidden">
-            <div class="h-full bg-gradient-to-r from-primary to-primary-dim rounded-full" style="width:88%;box-shadow:0 0 8px #81ecff;"></div>
-          </div>
-        </div>
-      </div>
-      <div class="flex flex-wrap gap-2">
-        <span class="px-4 py-1.5 bg-surface-variant/40 border border-outline-variant/20 rounded-full font-mono text-[10px] uppercase tracking-wider">策略諮詢</span>
-        <span class="px-4 py-1.5 bg-surface-variant/40 border border-outline-variant/20 rounded-full font-mono text-[10px] uppercase tracking-wider">工作流自動化</span>
-        <span class="px-4 py-1.5 bg-surface-variant/40 border border-outline-variant/20 rounded-full font-mono text-[10px] uppercase tracking-wider">生成式 AI</span>
-        <span class="px-4 py-1.5 bg-surface-variant/40 border border-outline-variant/20 rounded-full font-mono text-[10px] uppercase tracking-wider">企業培訓</span>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ══════════════════ CTA ══════════════════ -->
-<section class="py-20 md:py-28 px-6 md:px-8">
+<section class="py-14 md:py-20 px-6 md:px-8">
   <div class="max-w-7xl mx-auto reveal">
     <div class="rounded-2xl border border-primary/10 p-10 md:p-20 text-center relative overflow-hidden"
       style="background:linear-gradient(135deg,rgba(0,200,230,0.05),rgba(0,80,100,0.08),transparent);">
