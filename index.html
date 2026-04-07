@@ -6,317 +6,526 @@
 <title>麥克馬 Mike Ma｜AI 顧問與策略師</title>
 <meta name="description" content="專為個人與企業量身打造可落地的 AI 應用教學與自動化解決方案">
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 <script>
 tailwind.config = {
-  darkMode: 'class',
-  theme: {
-    extend: {
-      colors: {
-        'primary': '#81ecff',
-        'primary-container': '#00e3fd',
-        'primary-dim': '#00d4ec',
-        'on-primary-fixed': '#003840',
-        'surface': '#0a0f11',
-        'surface-container': '#141a1d',
-        'surface-container-low': '#0f1416',
-        'surface-container-lowest': '#000000',
-        'surface-container-high': '#1a2123',
-        'surface-container-highest': '#20272a',
-        'surface-variant': '#20272a',
-        'on-surface': '#edf1f4',
-        'on-surface-variant': '#a7acae',
-        'outline-variant': '#44494b',
-        'on-background': '#edf1f4',
-        'background': '#0a0f11',
+  darkMode:'class',
+  theme:{
+    extend:{
+      colors:{
+        'primary':'#81ecff','primary-container':'#00e3fd','primary-dim':'#00d4ec',
+        'on-primary-fixed':'#003840','surface':'#0a0f11','surface-container':'#141a1d',
+        'surface-container-low':'#0f1416','surface-container-lowest':'#000000',
+        'surface-container-high':'#1a2123','surface-container-highest':'#20272a',
+        'surface-variant':'#20272a','on-surface':'#edf1f4','on-surface-variant':'#a7acae',
+        'outline-variant':'#44494b','background':'#0a0f11',
       },
-      fontFamily: {
-        'headline': ['Space Grotesk', 'sans-serif'],
-        'body': ['Inter', 'sans-serif'],
-        'label': ['Manrope', 'sans-serif'],
+      fontFamily:{
+        'headline':['Space Grotesk','sans-serif'],
+        'body':['Inter','sans-serif'],
+        'label':['Manrope','sans-serif'],
+        'mono':['JetBrains Mono','monospace'],
       }
     }
   }
 }
 </script>
 <style>
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  .glass-card{
-    background:rgba(32,39,42,0.4);
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
-    border:1px solid rgba(129,236,255,0.06);
-  }
-  .text-glow{text-shadow:0 0 24px rgba(129,236,255,0.45);}
-  .hero-gradient{
-    background:
-      radial-gradient(circle at 75% 20%, rgba(0,227,253,0.09), transparent 45%),
-      radial-gradient(circle at 15% 80%, rgba(0,87,98,0.18), transparent 45%);
-  }
-  .card-hover{transition:transform .3s ease, box-shadow .3s ease;}
-  .card-hover:hover{transform:translateY(-6px);box-shadow:0 24px 48px rgba(0,0,0,.4);}
-  /* Mobile nav */
-  #mobile-menu{display:none;}
-  #mobile-menu.open{display:flex;}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+/* Glass card */
+.glass{
+  background:rgba(20,26,29,0.7);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(129,236,255,0.07);
+}
+
+/* Glow text */
+.text-glow{text-shadow:0 0 28px rgba(129,236,255,0.5);}
+.text-glow-sm{text-shadow:0 0 14px rgba(129,236,255,0.4);}
+
+/* Scan-line overlay */
+.scanlines::after{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(
+    180deg,
+    transparent,transparent 2px,
+    rgba(0,0,0,0.04) 2px,rgba(0,0,0,0.04) 4px
+  );
+  pointer-events:none;z-index:1;
+}
+
+/* Glowing border on hover */
+.glow-border{border:1px solid rgba(129,236,255,0.07);transition:border-color .3s,box-shadow .3s;}
+.glow-border:hover{border-color:rgba(129,236,255,0.3);box-shadow:0 0 30px rgba(129,236,255,0.07),inset 0 0 30px rgba(129,236,255,0.03);}
+
+/* Card lift */
+.lift{transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s;}
+.lift:hover{transform:translateY(-8px);box-shadow:0 28px 56px rgba(0,0,0,.5);}
+
+/* Status dot */
+@keyframes pulse-dot{0%,100%{opacity:1;}50%{opacity:.3;}}
+.status-dot{width:7px;height:7px;border-radius:50%;background:#22c55e;animation:pulse-dot 2s ease-in-out infinite;flex-shrink:0;}
+
+/* Glowing line */
+@keyframes glow-line{0%,100%{opacity:.4;}50%{opacity:1;}}
+.glow-line{background:linear-gradient(90deg,transparent,#81ecff,transparent);height:1px;animation:glow-line 3s ease-in-out infinite;}
+
+/* Floating animation */
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-14px);}}
+.float{animation:float 6s ease-in-out infinite;}
+
+/* Scroll reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1);}
+.reveal.visible{opacity:1;transform:none;}
+.reveal-delay-1{transition-delay:.1s;}
+.reveal-delay-2{transition-delay:.2s;}
+.reveal-delay-3{transition-delay:.3s;}
+
+/* Typing cursor */
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+.cursor::after{content:'|';animation:blink .8s step-end infinite;color:#81ecff;margin-left:2px;}
+
+/* Terminal card code */
+.term-line::before{content:'> ';color:rgba(129,236,255,0.5);}
+.term-ok::before{content:'✓ ';color:#22c55e;}
+.term-warn::before{content:'! ';color:#f59e0b;}
+
+/* Hero gradient */
+.hero-bg{
+  background:
+    radial-gradient(ellipse 60% 60% at 80% 40%, rgba(0,200,230,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 50% at 10% 60%, rgba(0,80,100,0.12) 0%, transparent 60%),
+    #000;
+}
+
+/* Service card image area */
+.svc-img{
+  height:200px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;
+  background:#050a0c;
+}
+
+/* Mobile menu */
+#mob-menu{display:none;}
+#mob-menu.open{display:flex;}
+
+/* Noise overlay */
+.noise::before{
+  content:'';position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:.5;
+}
 </style>
 </head>
-<body class="bg-black text-on-background font-body antialiased">
+<body class="bg-black text-on-background font-body antialiased overflow-x-hidden">
 
-<!-- ── 導覽列 ── -->
-<nav class="sticky top-0 z-50 w-full bg-zinc-950/60 backdrop-blur-xl border-b border-white/[0.06]">
+<!-- ══════════════════ NAV ══════════════════ -->
+<nav class="fixed top-0 z-50 w-full" style="background:rgba(0,0,0,0.7);backdrop-filter:blur(24px);border-bottom:1px solid rgba(129,236,255,0.06);">
   <div class="max-w-7xl mx-auto px-5 md:px-8 py-4 flex items-center justify-between">
-    <div class="font-headline text-xl font-bold text-zinc-100 tracking-tighter">Mike Ma</div>
-
-    <!-- Desktop links -->
-    <div class="hidden md:flex items-center gap-10">
-      <a href="#services" class="font-label text-[11px] uppercase tracking-widest text-primary border-b border-primary/40 hover:border-primary transition-colors">服務諮詢</a>
-      <a href="#lab"      class="font-label text-[11px] uppercase tracking-widest text-zinc-400 hover:text-primary transition-colors">AI 實驗室</a>
-      <a href="#about"    class="font-label text-[11px] uppercase tracking-widest text-zinc-400 hover:text-primary transition-colors">關於我</a>
+    <div class="font-headline text-lg font-bold text-white tracking-tighter flex items-center gap-2">
+      <span class="text-primary text-glow-sm">◈</span> Mike Ma
     </div>
-
+    <div class="hidden md:flex items-center gap-10">
+      <a href="#services" class="font-mono text-[11px] uppercase tracking-widest text-primary border-b border-primary/30 hover:border-primary pb-0.5 transition-colors">服務諮詢</a>
+      <a href="#lab"      class="font-mono text-[11px] uppercase tracking-widest text-zinc-400 hover:text-primary transition-colors">AI 實驗室</a>
+      <a href="#about"    class="font-mono text-[11px] uppercase tracking-widest text-zinc-400 hover:text-primary transition-colors">關於我</a>
+    </div>
     <div class="flex items-center gap-3">
       <a href="https://forms.gle/aTzTSBdJBxVNsnoG9" target="_blank"
-        class="bg-gradient-to-r from-primary to-primary-container text-on-primary-fixed px-5 py-2 rounded-lg font-label text-[11px] font-bold tracking-widest uppercase transition-all hover:shadow-[0_0_20px_rgba(129,236,255,0.4)] active:scale-95">
+        class="bg-gradient-to-r from-primary to-primary-container text-on-primary-fixed px-5 py-2 rounded font-mono text-[11px] font-bold tracking-widest uppercase transition-all hover:shadow-[0_0_24px_rgba(129,236,255,0.5)] active:scale-95">
         聯繫
       </a>
-      <!-- Hamburger -->
-      <button onclick="toggleMenu()" class="md:hidden text-zinc-400 hover:text-primary transition-colors" aria-label="選單">
+      <button onclick="toggleMob()" class="md:hidden text-zinc-400 hover:text-primary">
         <span class="material-symbols-outlined">menu</span>
       </button>
     </div>
   </div>
-
-  <!-- Mobile menu -->
-  <div id="mobile-menu" class="flex-col gap-1 px-5 pb-4 md:hidden border-t border-white/5">
-    <a href="#services" onclick="toggleMenu()" class="block py-3 font-label text-sm text-on-surface-variant hover:text-primary transition-colors">服務諮詢</a>
-    <a href="#lab"      onclick="toggleMenu()" class="block py-3 font-label text-sm text-on-surface-variant hover:text-primary transition-colors">AI 實驗室</a>
-    <a href="#about"    onclick="toggleMenu()" class="block py-3 font-label text-sm text-on-surface-variant hover:text-primary transition-colors">關於我</a>
+  <div id="mob-menu" class="flex-col px-5 pb-4 md:hidden border-t border-white/5">
+    <a href="#services" onclick="toggleMob()" class="block py-3 font-mono text-sm text-on-surface-variant hover:text-primary transition-colors">服務諮詢</a>
+    <a href="#lab"      onclick="toggleMob()" class="block py-3 font-mono text-sm text-on-surface-variant hover:text-primary transition-colors">AI 實驗室</a>
+    <a href="#about"    onclick="toggleMob()" class="block py-3 font-mono text-sm text-on-surface-variant hover:text-primary transition-colors">關於我</a>
   </div>
 </nav>
 
-<!-- ── Hero ── -->
-<section class="relative min-h-screen flex flex-col justify-center items-center px-6 overflow-hidden hero-gradient">
-  <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-[0.06] pointer-events-none"></div>
-  <div class="max-w-5xl mx-auto text-center z-10 py-24">
+<!-- ══════════════════ HERO ══════════════════ -->
+<section class="relative min-h-screen flex items-center hero-bg scanlines pt-20 overflow-hidden">
+  <!-- Neural network canvas -->
+  <canvas id="canvas" class="absolute inset-0 w-full h-full opacity-60" style="z-index:0;"></canvas>
 
-    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-10">
-      <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
-      <span class="text-primary font-label text-[10px] uppercase tracking-[0.22em]">協助您規劃並運用 AI 提升產出效率</span>
-    </div>
+  <!-- Grid overlay -->
+  <div class="absolute inset-0 pointer-events-none" style="z-index:0;background-image:linear-gradient(rgba(129,236,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(129,236,255,0.025) 1px,transparent 1px);background-size:60px 60px;"></div>
 
-    <h1 class="font-headline text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-bold tracking-tighter leading-[1.08] mb-8">
-      麥克馬 Mike Ma<br>
-      <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-dim text-glow">
-        AI 顧問與策略師
-      </span>
-    </h1>
+  <div class="max-w-7xl mx-auto px-6 md:px-8 w-full relative z-10 py-20">
+    <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-0">
 
-    <p class="font-body text-base md:text-xl text-on-surface-variant max-w-2xl mx-auto mb-12 leading-relaxed">
-      專為個人與企業量身打造「可落地」的 AI 應用教學與自動化解決方案，<br class="hidden md:block">讓 AI 真正成為你的工作夥伴
-    </p>
+      <!-- Text -->
+      <div class="lg:w-1/2 text-left">
+        <div class="font-mono text-[10px] tracking-[0.35em] text-primary/60 uppercase mb-6 flex items-center gap-3">
+          <span class="status-dot"></span>SYSTEM: ONLINE &nbsp;·&nbsp; AI STRATEGIC ARCHITECTURE
+        </div>
 
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-      <a href="https://forms.gle/aTzTSBdJBxVNsnoG9" target="_blank"
-        class="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary-fixed rounded-xl font-headline font-bold text-base transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(129,236,255,0.35)] text-center">
-        立即諮詢 AI 導入
-      </a>
-      <a href="#lab"
-        class="w-full sm:w-auto px-10 py-4 bg-surface-variant/20 backdrop-blur-md border border-outline-variant/30 text-on-surface rounded-xl font-headline font-bold text-base hover:bg-surface-variant/40 transition-all text-center">
-        探索 AI 工具箱
-      </a>
-    </div>
-  </div>
-  <div class="absolute -bottom-32 left-1/2 -translate-x-1/2 w-[140%] h-96 bg-primary/[0.04] blur-[140px] rounded-[100%]"></div>
-</section>
+        <h1 class="font-headline font-bold leading-[1.05] mb-6">
+          <span class="block text-4xl sm:text-5xl md:text-6xl text-white">麥克馬 Mike Ma</span>
+          <span class="block text-4xl sm:text-5xl md:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-dim text-glow mt-1">AI 顧問與策略師</span>
+        </h1>
 
-<!-- ── 核心服務 ── -->
-<section class="py-24 md:py-32 px-6 md:px-8 max-w-7xl mx-auto" id="services">
-  <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-14 gap-6">
-    <div class="max-w-lg">
-      <p class="font-label text-[10px] text-primary/60 tracking-[0.4em] uppercase mb-3">服務項目</p>
-      <h2 class="font-headline text-3xl md:text-4xl font-bold">核心服務範疇</h2>
-      <p class="text-on-surface-variant mt-3 text-sm md:text-base">從策略諮詢到技術落地，全方位加速 AI 數位轉型。</p>
-    </div>
-  </div>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+        <p class="text-on-surface-variant text-base md:text-lg leading-relaxed max-w-lg mb-10">
+          讓 AI 真正成為你的工作夥伴。透過深度技術整合與策略佈署，釋放組織的數位潛能。
+        </p>
 
-    <div class="glass-card p-8 rounded-2xl flex flex-col gap-6 card-hover">
-      <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
-        <span class="material-symbols-outlined text-2xl">query_stats</span>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="https://forms.gle/aTzTSBdJBxVNsnoG9" target="_blank"
+            class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary-fixed rounded font-headline font-bold text-sm transition-all hover:scale-105 hover:shadow-[0_0_32px_rgba(129,236,255,0.4)]">
+            立即諮詢 AI 導入 <span class="material-symbols-outlined text-base">arrow_forward</span>
+          </a>
+          <a href="#lab"
+            class="inline-flex items-center justify-center gap-2 px-8 py-4 border border-primary/25 text-primary rounded font-headline font-bold text-sm hover:bg-primary/5 hover:border-primary/50 transition-all">
+            探索 AI 工具箱
+          </a>
+        </div>
+
+        <div class="mt-12 pt-8 border-t border-white/5 flex items-center gap-8">
+          <div>
+            <div class="font-headline text-2xl font-bold text-primary">40%+</div>
+            <div class="font-mono text-[10px] text-zinc-500 uppercase tracking-widest mt-0.5">工時優化</div>
+          </div>
+          <div class="w-px h-8 bg-white/10"></div>
+          <div>
+            <div class="font-headline text-2xl font-bold text-primary">8+</div>
+            <div class="font-mono text-[10px] text-zinc-500 uppercase tracking-widest mt-0.5">AI 工具上線</div>
+          </div>
+          <div class="w-px h-8 bg-white/10"></div>
+          <div>
+            <div class="font-headline text-2xl font-bold text-primary">100%</div>
+            <div class="font-mono text-[10px] text-zinc-500 uppercase tracking-widest mt-0.5">客製落地</div>
+          </div>
+        </div>
       </div>
-      <div>
-        <h3 class="font-headline text-xl font-bold mb-3">企業 AI 導入諮詢</h3>
-        <p class="text-on-surface-variant text-sm leading-relaxed">評估現有工作流、鎖定核心痛點，精準對接 AI 解決方案，實證可減少 40% 以上冗餘工時。</p>
-      </div>
-      <a href="https://forms.gle/aTzTSBdJBxVNsnoG9" target="_blank"
-        class="mt-auto pt-6 border-t border-outline-variant/10 text-primary font-label text-xs tracking-widest flex items-center gap-2 hover:gap-3 transition-all">
-        效率最佳化 <span class="material-symbols-outlined text-sm">arrow_forward</span>
-      </a>
-    </div>
 
-    <div class="glass-card p-8 rounded-2xl flex flex-col gap-6 card-hover">
-      <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
-        <span class="material-symbols-outlined text-2xl">school</span>
+      <!-- Neural orb (desktop) -->
+      <div class="lg:w-1/2 flex items-center justify-center relative hidden lg:flex">
+        <div class="relative w-[480px] h-[480px] float">
+          <!-- Outer ring -->
+          <div class="absolute inset-0 rounded-full border border-primary/10" style="animation:spin 20s linear infinite;"></div>
+          <div class="absolute inset-8 rounded-full border border-primary/8" style="animation:spin 15s linear infinite reverse;"></div>
+          <!-- Glow orb -->
+          <div class="absolute inset-16 rounded-full" style="background:radial-gradient(circle,rgba(0,227,253,0.18) 0%,rgba(0,100,120,0.08) 50%,transparent 70%);filter:blur(8px);"></div>
+          <!-- AI text art -->
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-center">
+              <div class="font-headline text-[7rem] font-black leading-none text-transparent" style="background:linear-gradient(135deg,rgba(129,236,255,0.35),rgba(0,200,230,0.08));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">AI</div>
+              <div class="font-mono text-xs text-primary/40 tracking-[0.4em] uppercase mt-2">Neural Core</div>
+            </div>
+          </div>
+          <!-- Orbiting dots -->
+          <div class="absolute inset-0" style="animation:spin 8s linear infinite;">
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-primary" style="box-shadow:0 0 12px #81ecff;"></div>
+          </div>
+          <div class="absolute inset-0" style="animation:spin 12s linear infinite reverse;">
+            <div class="absolute bottom-8 right-8 w-2 h-2 rounded-full bg-primary-dim" style="box-shadow:0 0 8px #00d4ec;"></div>
+          </div>
+        </div>
       </div>
-      <div>
-        <h3 class="font-headline text-xl font-bold mb-3">專業 AI 培訓課程</h3>
-        <p class="text-on-surface-variant text-sm leading-relaxed">專為保險與行銷專業設計。深度應用生成式 AI 與 NotebookLM，將知識轉化為即戰力。</p>
-      </div>
-      <a href="https://forms.gle/aTzTSBdJBxVNsnoG9" target="_blank"
-        class="mt-auto pt-6 border-t border-outline-variant/10 text-primary font-label text-xs tracking-widest flex items-center gap-2 hover:gap-3 transition-all">
-        菁英培訓 <span class="material-symbols-outlined text-sm">arrow_forward</span>
-      </a>
-    </div>
 
-    <div class="glass-card p-8 rounded-2xl flex flex-col gap-6 card-hover">
-      <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
-        <span class="material-symbols-outlined text-2xl">developer_mode_tv</span>
-      </div>
-      <div>
-        <h3 class="font-headline text-xl font-bold mb-3">客製化工具開發</h3>
-        <p class="text-on-surface-variant text-sm leading-relaxed">解決細碎繁雜的數位任務。開發批次自動化、AI 輔助排版等高價值生產力工具。</p>
-      </div>
-      <a href="https://forms.gle/aTzTSBdJBxVNsnoG9" target="_blank"
-        class="mt-auto pt-6 border-t border-outline-variant/10 text-primary font-label text-xs tracking-widest flex items-center gap-2 hover:gap-3 transition-all">
-        客製自動化 <span class="material-symbols-outlined text-sm">arrow_forward</span>
-      </a>
     </div>
-
   </div>
 </section>
 
-<!-- ── AI 實驗室 ── -->
-<section class="py-24 md:py-32 bg-surface-container-low" id="lab">
-  <div class="max-w-7xl mx-auto px-6 md:px-8">
+<!-- ══════════════════ SERVICES ══════════════════ -->
+<section class="py-24 md:py-32 px-6 md:px-8" id="services">
+  <div class="max-w-7xl mx-auto">
 
-    <div class="text-center mb-16 md:mb-20">
-      <p class="font-label text-[10px] text-primary/60 tracking-[0.4em] uppercase mb-4">實際運用成果</p>
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-14 gap-4 reveal">
+      <div>
+        <p class="font-mono text-[10px] text-primary/50 tracking-[0.5em] uppercase mb-3">CORE COMPETENCIES</p>
+        <h2 class="font-headline text-3xl md:text-4xl font-bold">核心服務範疇</h2>
+      </div>
+      <p class="font-mono text-[9px] text-zinc-600 tracking-widest uppercase text-right max-w-[200px] leading-loose hidden md:block">
+        ARCHITECTING THE FUTURE<br>THROUGH AI INTEGRATION
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+      <!-- Card 1 -->
+      <div class="glass glow-border lift rounded-2xl overflow-hidden reveal reveal-delay-1">
+        <div class="svc-img">
+          <!-- CSS art: circuit grid -->
+          <div class="absolute inset-0" style="background:linear-gradient(135deg,#020d10,#041a20);"></div>
+          <div class="absolute inset-0" style="background-image:linear-gradient(rgba(129,236,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(129,236,255,0.04) 1px,transparent 1px);background-size:24px 24px;"></div>
+          <div class="relative z-10 text-center">
+            <div class="font-headline text-7xl font-black text-transparent" style="background:linear-gradient(135deg,rgba(129,236,255,0.5),rgba(0,200,230,0.1));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">AI</div>
+            <div class="font-mono text-[9px] text-primary/40 tracking-[0.4em] mt-1">SYSTEM_CORE</div>
+          </div>
+          <div class="absolute bottom-0 left-0 right-0 h-px bg-primary/15"></div>
+          <div class="absolute top-3 right-3">
+            <span class="font-mono text-[9px] bg-primary/10 text-primary px-2 py-0.5 rounded uppercase tracking-widest">READY</span>
+          </div>
+        </div>
+        <div class="p-7 flex flex-col gap-4">
+          <h3 class="font-headline text-xl font-bold">企業 AI 導入諮詢</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed">評估現有工作流、鎖定核心痛點，精準對接 AI 解決方案，實證可減少 40% 以上冗餘工時。</p>
+          <div class="pt-4 border-t border-white/5">
+            <div class="flex gap-2 mb-3">
+              <span class="font-mono text-[9px] bg-surface-variant/60 text-zinc-400 px-2 py-0.5 rounded uppercase">效率最佳化</span>
+              <span class="font-mono text-[9px] bg-surface-variant/60 text-zinc-400 px-2 py-0.5 rounded uppercase">可擴充</span>
+            </div>
+            <a href="https://forms.gle/aTzTSBdJBxVNsnoG9" target="_blank" class="flex items-center gap-1.5 text-primary font-mono text-xs hover:gap-3 transition-all">
+              預約諮詢 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="glass glow-border lift rounded-2xl overflow-hidden reveal reveal-delay-2">
+        <div class="svc-img">
+          <div class="absolute inset-0" style="background:linear-gradient(135deg,#060a12,#0a1520);"></div>
+          <!-- Portrait silhouette CSS art -->
+          <div class="absolute inset-0 flex items-center justify-center opacity-20">
+            <div style="width:80px;height:100px;background:linear-gradient(180deg,#81ecff,#00d4ec);clip-path:ellipse(40% 35% at 50% 35%);"></div>
+          </div>
+          <div class="absolute inset-0 flex items-end justify-center pb-6">
+            <div class="text-center">
+              <span class="material-symbols-outlined text-primary/40 text-6xl" style="font-variation-settings:'FILL' 1;">psychology</span>
+            </div>
+          </div>
+          <div class="absolute bottom-0 left-0 right-0 h-px bg-primary/15"></div>
+          <div class="absolute top-3 right-3">
+            <span class="font-mono text-[9px] bg-green-500/10 text-green-400 px-2 py-0.5 rounded uppercase tracking-widest">ACTIVE</span>
+          </div>
+        </div>
+        <div class="p-7 flex flex-col gap-4">
+          <h3 class="font-headline text-xl font-bold">專業 AI 培訓課程</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed">專為保險與行銷專業設計。深度應用生成式 AI 與 NotebookLM，將知識轉化為即戰力。</p>
+          <div class="pt-4 border-t border-white/5">
+            <div class="flex gap-2 mb-3">
+              <span class="font-mono text-[9px] bg-surface-variant/60 text-zinc-400 px-2 py-0.5 rounded uppercase">諮詢</span>
+              <span class="font-mono text-[9px] bg-surface-variant/60 text-zinc-400 px-2 py-0.5 rounded uppercase">策略</span>
+            </div>
+            <a href="https://forms.gle/aTzTSBdJBxVNsnoG9" target="_blank" class="flex items-center gap-1.5 text-primary font-mono text-xs hover:gap-3 transition-all">
+              了解課程 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="glass glow-border lift rounded-2xl overflow-hidden reveal reveal-delay-3">
+        <div class="svc-img">
+          <div class="absolute inset-0" style="background:linear-gradient(135deg,#050810,#08121c);"></div>
+          <!-- Globe/network CSS art -->
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="relative w-28 h-28 opacity-40">
+              <div class="absolute inset-0 rounded-full border border-primary/50"></div>
+              <div class="absolute inset-2 rounded-full border border-primary/30" style="transform:rotateX(60deg);"></div>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings:'FILL' 0;">language</span>
+              </div>
+            </div>
+          </div>
+          <div class="absolute bottom-0 left-0 right-0 h-px bg-primary/15"></div>
+          <div class="absolute top-3 right-3">
+            <span class="font-mono text-[9px] bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded uppercase tracking-widest">DEV</span>
+          </div>
+          <div class="absolute top-3 left-3 font-mono text-[9px] text-zinc-600 uppercase tracking-widest">AI PRODUCT DEV</div>
+        </div>
+        <div class="p-7 flex flex-col gap-4">
+          <h3 class="font-headline text-xl font-bold">客製化工具開發</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed">解決細碎繁雜的數位任務。開發批次自動化、AI 輔助排版等高價值生產力工具。</p>
+          <div class="pt-4 border-t border-white/5">
+            <div class="flex gap-2 mb-3">
+              <span class="font-mono text-[9px] bg-surface-variant/60 text-zinc-400 px-2 py-0.5 rounded uppercase">DEV</span>
+              <span class="font-mono text-[9px] bg-surface-variant/60 text-zinc-400 px-2 py-0.5 rounded uppercase">介面</span>
+            </div>
+            <a href="https://forms.gle/aTzTSBdJBxVNsnoG9" target="_blank" class="flex items-center gap-1.5 text-primary font-mono text-xs hover:gap-3 transition-all">
+              洽談需求 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ AI LAB ══════════════════ -->
+<section class="py-24 md:py-32 px-6 md:px-8 relative" id="lab" style="background:linear-gradient(180deg,#000 0%,#050b0e 100%);">
+  <div class="absolute inset-0 pointer-events-none" style="background-image:linear-gradient(rgba(129,236,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(129,236,255,0.02) 1px,transparent 1px);background-size:80px 80px;"></div>
+  <div class="max-w-7xl mx-auto relative z-10">
+
+    <div class="text-center mb-16 reveal">
+      <p class="font-mono text-[10px] text-primary/50 tracking-[0.5em] uppercase mb-5">EXPERIMENTATION NODE</p>
       <h2 class="font-headline text-3xl md:text-5xl font-bold mb-4">AI 實驗室</h2>
-      <div class="w-14 h-px bg-primary mx-auto mb-6"></div>
-      <p class="text-on-surface-variant max-w-xl mx-auto text-sm md:text-base">真實 AI 產出工具分享，親身體驗 AI 帶來的生產力變革</p>
+      <div class="glow-line w-20 mx-auto mb-6"></div>
+      <p class="text-on-surface-variant text-sm md:text-base max-w-lg mx-auto">真實 AI 產出工具分享，親身體驗 AI 帶來的生產力變革</p>
     </div>
 
     <!-- 🚀 AI 智慧生成與優化 -->
-    <div class="mb-14">
-      <div class="flex items-center gap-3 mb-6 pb-4 border-b border-white/[0.05]">
-        <span class="text-xl">🚀</span>
-        <h3 class="font-headline text-lg md:text-xl font-bold">AI 智慧生成與優化</h3>
+    <div class="mb-12 reveal">
+      <div class="flex items-center gap-3 mb-5">
+        <div class="status-dot"></div>
+        <span class="font-mono text-[10px] text-zinc-500 tracking-widest">01 /</span>
+        <span class="font-headline text-base font-bold">🚀 AI 智慧生成與優化</span>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
 
         <a href="https://ai.studio/apps/drive/1jJc70AxEZp-ai1JDqGcaa8rjR5kq7paP?fullscreenApplet=true" target="_blank"
-          class="glass-card p-6 rounded-xl card-hover flex flex-col gap-4 group">
-          <div class="flex justify-between items-start gap-2">
-            <h4 class="font-headline font-bold text-sm md:text-base leading-snug">LinkedIn 履歷職涯推手</h4>
-            <span class="material-symbols-outlined text-primary text-sm opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 mt-0.5">open_in_new</span>
+          class="glass glow-border lift rounded-xl p-5 flex flex-col gap-3 group">
+          <div class="flex items-start justify-between">
+            <span class="font-mono text-[9px] text-zinc-600">01:01</span>
+            <span class="material-symbols-outlined text-sm text-zinc-600 group-hover:text-primary transition-colors">open_in_new</span>
           </div>
-          <p class="text-on-surface-variant text-xs leading-relaxed flex-1">支援上傳 LinkedIn 匯出的 PDF，透過 AI 重新排版與精煉文字，將瑣碎經歷轉化為極具競爭力的專業履歷。</p>
-          <span class="font-label text-xs text-primary tracking-widest uppercase font-bold">立即體驗 →</span>
+          <h4 class="font-headline font-bold text-sm leading-snug">LinkedIn 履歷職涯推手</h4>
+          <div class="font-mono text-[10px] space-y-1 flex-1">
+            <div class="term-line text-zinc-500">upload linkedin_export.pdf</div>
+            <div class="term-ok text-green-500/70">AI 重構履歷完成</div>
+            <div class="term-line text-zinc-500">競爭力分析中...</div>
+          </div>
+          <span class="font-mono text-[10px] text-primary group-hover:gap-2 transition-all">立即體驗 →</span>
         </a>
 
         <a href="https://ai.studio/apps/drive/1b-l0IlkS9TJlxHFO5fHBE1dXf75XoCJR?fullscreenApplet=true" target="_blank"
-          class="glass-card p-6 rounded-xl card-hover flex flex-col gap-4 group">
-          <div class="flex justify-between items-start gap-2">
-            <h4 class="font-headline font-bold text-sm md:text-base leading-snug">AI 文字轉語音工具</h4>
-            <span class="material-symbols-outlined text-primary text-sm opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 mt-0.5">open_in_new</span>
+          class="glass glow-border lift rounded-xl p-5 flex flex-col gap-3 group">
+          <div class="flex items-start justify-between">
+            <span class="font-mono text-[9px] text-zinc-600">01:02</span>
+            <span class="material-symbols-outlined text-sm text-zinc-600 group-hover:text-primary transition-colors">open_in_new</span>
           </div>
-          <p class="text-on-surface-variant text-xs leading-relaxed flex-1">輸入文字即可生成自然人聲，支援多種語調選擇，讓您的內容創作與簡報更具溫度。</p>
-          <span class="font-label text-xs text-primary tracking-widest uppercase font-bold">立即體驗 →</span>
+          <h4 class="font-headline font-bold text-sm leading-snug">AI 文字轉語音工具</h4>
+          <div class="font-mono text-[10px] space-y-1 flex-1">
+            <div class="term-line text-zinc-500">input text --lang zh-TW</div>
+            <div class="term-ok text-green-500/70">自然語音生成完成</div>
+            <div class="term-line text-zinc-500">語調選擇 active...</div>
+          </div>
+          <span class="font-mono text-[10px] text-primary">立即體驗 →</span>
         </a>
 
         <a href="https://ai.studio/apps/drive/1nT9hR08z-Aayu-glchcI_eVFJgX1I1rT?fullscreenApplet=true" target="_blank"
-          class="glass-card p-6 rounded-xl card-hover flex flex-col gap-4 group">
-          <div class="flex justify-between items-start gap-2">
-            <h4 class="font-headline font-bold text-sm md:text-base leading-snug">AI 圖片尺寸批次再製</h4>
-            <span class="material-symbols-outlined text-primary text-sm opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 mt-0.5">open_in_new</span>
+          class="glass glow-border lift rounded-xl p-5 flex flex-col gap-3 group">
+          <div class="flex items-start justify-between">
+            <span class="font-mono text-[9px] text-zinc-600">01:03</span>
+            <span class="material-symbols-outlined text-sm text-zinc-600 group-hover:text-primary transition-colors">open_in_new</span>
           </div>
-          <p class="text-on-surface-variant text-xs leading-relaxed flex-1">支援多圖批次智慧識別主體，自動調整至指定比例，省去重複裁切的瑣事。</p>
-          <span class="font-label text-xs text-primary tracking-widest uppercase font-bold">立即體驗 →</span>
+          <h4 class="font-headline font-bold text-sm leading-snug">AI 圖片尺寸批次再製</h4>
+          <div class="font-mono text-[10px] space-y-1 flex-1">
+            <div class="term-line text-zinc-500">batch_resize --ratio 1:1</div>
+            <div class="term-ok text-green-500/70">主體識別完成</div>
+            <div class="term-line text-zinc-500">自動裁切輸出中...</div>
+          </div>
+          <span class="font-mono text-[10px] text-primary">立即體驗 →</span>
         </a>
 
         <a href="https://ai.studio/apps/drive/1mVoqT21wIQeiZIgaYdOyHxT6nssg5BaB?fullscreenApplet=true" target="_blank"
-          class="glass-card p-6 rounded-xl card-hover flex flex-col gap-4 group">
-          <div class="flex justify-between items-start gap-2">
-            <h4 class="font-headline font-bold text-sm md:text-base leading-snug">AI 圖片智慧標籤</h4>
-            <span class="material-symbols-outlined text-primary text-sm opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 mt-0.5">open_in_new</span>
+          class="glass glow-border lift rounded-xl p-5 flex flex-col gap-3 group">
+          <div class="flex items-start justify-between">
+            <span class="font-mono text-[9px] text-zinc-600">01:04</span>
+            <span class="material-symbols-outlined text-sm text-zinc-600 group-hover:text-primary transition-colors">open_in_new</span>
           </div>
-          <p class="text-on-surface-variant text-xs leading-relaxed flex-1">批次 AI 解析圖片內容，自動生成精準 Tag，大幅縮短素材管理與圖庫索引的時間。</p>
-          <span class="font-label text-xs text-primary tracking-widest uppercase font-bold">立即體驗 →</span>
+          <h4 class="font-headline font-bold text-sm leading-snug">AI 圖片智慧標籤</h4>
+          <div class="font-mono text-[10px] space-y-1 flex-1">
+            <div class="term-line text-zinc-500">auto_tag --batch images/</div>
+            <div class="term-ok text-green-500/70">精準 Tag 生成完成</div>
+            <div class="term-line text-zinc-500">圖庫索引更新中...</div>
+          </div>
+          <span class="font-mono text-[10px] text-primary">立即體驗 →</span>
         </a>
 
       </div>
     </div>
 
     <!-- 🛠 高效生產力自動化 -->
-    <div class="mb-14">
-      <div class="flex items-center gap-3 mb-6 pb-4 border-b border-white/[0.05]">
-        <span class="text-xl">🛠</span>
-        <h3 class="font-headline text-lg md:text-xl font-bold">高效生產力自動化</h3>
+    <div class="mb-12 reveal">
+      <div class="flex items-center gap-3 mb-5">
+        <div class="status-dot"></div>
+        <span class="font-mono text-[10px] text-zinc-500 tracking-widest">02 /</span>
+        <span class="font-headline text-base font-bold">🛠 高效生產力自動化</span>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
 
         <a href="https://ai.studio/apps/drive/1X0zv-FX_MmV__9NCAEGv0e1STRMaoiRN?fullscreenApplet=true" target="_blank"
-          class="glass-card p-6 rounded-xl card-hover flex flex-col gap-4 group border-l-2 border-primary/30">
-          <div class="flex justify-between items-start gap-2">
-            <h4 class="font-headline font-bold text-sm md:text-base leading-snug">Excel 圖片批次下載器</h4>
-            <span class="material-symbols-outlined text-primary text-sm opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 mt-0.5">open_in_new</span>
+          class="glass glow-border lift rounded-xl p-5 flex flex-col gap-3 group" style="border-left:2px solid rgba(129,236,255,0.25);">
+          <div class="flex items-start justify-between">
+            <span class="font-mono text-[9px] text-zinc-600">02:01</span>
+            <span class="material-symbols-outlined text-sm text-zinc-600 group-hover:text-primary transition-colors">open_in_new</span>
           </div>
-          <p class="text-on-surface-variant text-xs leading-relaxed flex-1">僅需拖入包含「檔名」與「圖片連結」的 Excel 檔案，系統自動批次下載，告別手動點擊，效率提升 100%。</p>
-          <span class="font-label text-xs text-primary tracking-widest uppercase font-bold">立即體驗 →</span>
+          <h4 class="font-headline font-bold text-sm leading-snug">Excel 圖片批次下載器</h4>
+          <div class="font-mono text-[10px] space-y-1 flex-1">
+            <div class="term-line text-zinc-500">import excel --drag-drop</div>
+            <div class="term-ok text-green-500/70">批次下載任務開始</div>
+            <div class="term-warn text-amber-500/70">效率提升 100%</div>
+          </div>
+          <span class="font-mono text-[10px] text-primary">立即體驗 →</span>
         </a>
 
       </div>
     </div>
 
     <!-- 🎨 社群經營與設計 -->
-    <div class="mb-14">
-      <div class="flex items-center gap-3 mb-6 pb-4 border-b border-white/[0.05]">
-        <span class="text-xl">🎨</span>
-        <h3 class="font-headline text-lg md:text-xl font-bold">社群經營與設計</h3>
+    <div class="mb-12 reveal">
+      <div class="flex items-center gap-3 mb-5">
+        <div class="status-dot"></div>
+        <span class="font-mono text-[10px] text-zinc-500 tracking-widest">03 /</span>
+        <span class="font-headline text-base font-bold">🎨 社群經營與設計</span>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
 
         <a href="https://mikematw0316-labbot.github.io/carousel-tool/" target="_blank"
-          class="glass-card p-6 rounded-xl card-hover flex flex-col gap-4 group">
-          <div class="flex justify-between items-start gap-2">
-            <h4 class="font-headline font-bold text-sm md:text-base leading-snug">FB / IG 社群製圖神器</h4>
-            <span class="material-symbols-outlined text-primary text-sm opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 mt-0.5">open_in_new</span>
+          class="glass glow-border lift rounded-xl p-5 flex flex-col gap-3 group">
+          <div class="flex items-start justify-between">
+            <span class="font-mono text-[9px] text-zinc-600">03:01</span>
+            <span class="material-symbols-outlined text-sm text-zinc-600 group-hover:text-primary transition-colors">open_in_new</span>
           </div>
-          <p class="text-on-surface-variant text-xs leading-relaxed flex-1">多種風格模板供選擇，快速調整照片排版與視覺樣式，打造極高點擊率的社群貼文。</p>
-          <span class="font-label text-xs text-primary tracking-widest uppercase font-bold">立即體驗 →</span>
+          <h4 class="font-headline font-bold text-sm leading-snug">FB / IG 社群製圖神器</h4>
+          <div class="font-mono text-[10px] space-y-1 flex-1">
+            <div class="term-line text-zinc-500">SELECT template --style auto</div>
+            <div class="term-ok text-green-500/70">視覺排版生成完成</div>
+            <div class="term-line text-zinc-500">貼文發布就緒...</div>
+          </div>
+          <span class="font-mono text-[10px] text-primary">立即體驗 →</span>
         </a>
 
       </div>
     </div>
 
     <!-- 🎮 創意遊戲娛樂 -->
-    <div>
-      <div class="flex items-center gap-3 mb-6 pb-4 border-b border-white/[0.05]">
-        <span class="text-xl">🎮</span>
-        <h3 class="font-headline text-lg md:text-xl font-bold">創意遊戲娛樂</h3>
+    <div class="reveal">
+      <div class="flex items-center gap-3 mb-5">
+        <div class="status-dot"></div>
+        <span class="font-mono text-[10px] text-zinc-500 tracking-widest">04 /</span>
+        <span class="font-headline text-base font-bold">🎮 創意遊戲娛樂</span>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
 
         <a href="https://mikematw0316-labbot.github.io/territory-game/" target="_blank"
-          class="glass-card p-6 rounded-xl card-hover flex flex-col gap-4 group">
-          <div class="flex justify-between items-start gap-2">
-            <h4 class="font-headline font-bold text-sm md:text-base leading-snug">佔地風雲：多人對決</h4>
-            <span class="material-symbols-outlined text-primary text-sm opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 mt-0.5">open_in_new</span>
+          class="glass glow-border lift rounded-xl p-5 flex flex-col gap-3 group">
+          <div class="flex items-start justify-between">
+            <span class="font-mono text-[9px] text-zinc-600">04:01</span>
+            <span class="material-symbols-outlined text-sm text-zinc-600 group-hover:text-primary transition-colors">open_in_new</span>
           </div>
-          <p class="text-on-surface-variant text-xs leading-relaxed flex-1">2–8 人預測競猜小遊戲，簡單上手、緊張感滿分的預測心理戰！</p>
-          <span class="font-label text-xs text-primary tracking-widest uppercase font-bold">立即體驗 →</span>
+          <h4 class="font-headline font-bold text-sm leading-snug">佔地風雲：多人對決</h4>
+          <div class="font-mono text-[10px] space-y-1 flex-1">
+            <div class="term-line text-zinc-500">CONNECT players --max 8</div>
+            <div class="term-ok text-green-500/70">領地擴張引擎 active</div>
+            <div class="term-line text-zinc-500">預測系統 online...</div>
+          </div>
+          <span class="font-mono text-[10px] text-primary">立即體驗 →</span>
         </a>
 
         <a href="https://dungeon-react-production.up.railway.app" target="_blank"
-          class="glass-card p-6 rounded-xl card-hover flex flex-col gap-4 group">
-          <div class="flex justify-between items-start gap-2">
-            <h4 class="font-headline font-bold text-sm md:text-base leading-snug">地城魔王反攻：終結英雄傳說</h4>
-            <span class="material-symbols-outlined text-primary text-sm opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 mt-0.5">open_in_new</span>
+          class="glass glow-border lift rounded-xl p-5 flex flex-col gap-3 group">
+          <div class="flex items-start justify-between">
+            <span class="font-mono text-[9px] text-zinc-600">04:02</span>
+            <span class="material-symbols-outlined text-sm text-zinc-600 group-hover:text-primary transition-colors">open_in_new</span>
           </div>
-          <p class="text-on-surface-variant text-xs leading-relaxed flex-1">D&D 風格 2D RPG，骰子決定命運，挑戰全球排行榜。換你扮演反派魔王，終結那些英雄！</p>
-          <span class="font-label text-xs text-primary tracking-widest uppercase font-bold">立即體驗 →</span>
+          <h4 class="font-headline font-bold text-sm leading-snug">地城魔王反攻：終結英雄傳說</h4>
+          <div class="font-mono text-[10px] space-y-1 flex-1">
+            <div class="term-line text-zinc-500">GENERATE world.map</div>
+            <div class="term-ok text-green-500/70">D&D 骰子引擎 active</div>
+            <div class="term-line text-zinc-500">全球排行榜 online...</div>
+          </div>
+          <span class="font-mono text-[10px] text-primary">立即體驗 →</span>
         </a>
 
       </div>
@@ -325,87 +534,174 @@ tailwind.config = {
   </div>
 </section>
 
-<!-- ── 關於我 ── -->
+<!-- ══════════════════ ABOUT ══════════════════ -->
 <section class="py-24 md:py-36 px-6 md:px-8 max-w-7xl mx-auto overflow-hidden" id="about">
   <div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
-
-    <div class="w-full lg:w-2/5 relative flex-shrink-0">
-      <div class="relative z-10 rounded-2xl overflow-hidden aspect-[4/5] bg-surface-container-high max-w-sm mx-auto lg:max-w-none">
-        <img
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBS3jXig_n3-YmnubE0A0hxC3l0Ox0SV-OKZUwI9OhG6_kWJJpruihPmNGX_7f3qqYpil8BFJJ9-6DAWdbBPsT-BBthtZtZgJKGrLbhlosh0IHT39Gadx9-ioMlkbBFUSCfatEdd4RQfHdwPDE0TIQJaOrBZ6s3Yd5UIG1BNQ1J4k8dq9ldgKrMUtGJIs7j-2iOUExTnePU9DHsnLu7_iH-DYmuz46C9pG_8Cj2zlN7M2sBGyJ56osefsZ5AVkF2ByZ8u9DTiXqkVpp"
-          alt="Mike Ma 專業形象照"
-          class="w-full h-full object-cover">
+    <div class="w-full lg:w-2/5 flex-shrink-0 reveal">
+      <div class="relative max-w-sm mx-auto lg:max-w-none">
+        <div class="rounded-2xl overflow-hidden aspect-[4/5] bg-surface-container-high" style="border:1px solid rgba(129,236,255,0.1);">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBS3jXig_n3-YmnubE0A0hxC3l0Ox0SV-OKZUwI9OhG6_kWJJpruihPmNGX_7f3qqYpil8BFJJ9-6DAWdbBPsT-BBthtZtZgJKGrLbhlosh0IHT39Gadx9-ioMlkbBFUSCfatEdd4RQfHdwPDE0TIQJaOrBZ6s3Yd5UIG1BNQ1J4k8dq9ldgKrMUtGJIs7j-2iOUExTnePU9DHsnLu7_iH-DYmuz46C9pG_8Cj2zlN7M2sBGyJ56osefsZ5AVkF2ByZ8u9DTiXqkVpp"
+            alt="Mike Ma 專業形象照" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+        </div>
+        <div class="absolute -top-4 -right-4 w-24 h-24 rounded-full border border-primary/15 hidden lg:block"></div>
+        <div class="absolute -bottom-4 -left-4 w-16 h-16 rounded-full border border-primary/10 hidden lg:block"></div>
       </div>
-      <div class="absolute -top-6 -left-6 w-full h-full border border-primary/15 rounded-2xl -z-10 translate-x-3 translate-y-3 hidden lg:block"></div>
     </div>
-
-    <div class="w-full lg:w-3/5">
-      <p class="font-label text-[10px] tracking-[0.5em] text-primary mb-5 uppercase font-bold">專業背景與願景</p>
-      <h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold mb-8 leading-tight">
-        擅長運用 <span class="text-primary">AI 技術</span><br>滿足您的商業策略
+    <div class="w-full lg:w-3/5 reveal">
+      <p class="font-mono text-[10px] tracking-[0.5em] text-primary mb-5 uppercase">EXPERTISE &amp; VISION</p>
+      <h2 class="font-headline text-3xl md:text-5xl font-bold mb-6 leading-tight">
+        擅長運用 <span class="text-primary text-glow-sm">AI 技術</span><br>滿足您的商業策略
       </h2>
       <p class="text-on-surface-variant leading-relaxed mb-8 text-sm md:text-base">
         專注於 AI 實施與自動化工作流，協助個人與企業將 AI 技術轉化為真實、可衡量的商業成果。無論是生成式 AI 應用、NotebookLM 深度整合，還是工作流自動化，都能提供完整的策略規劃與執行落地。
       </p>
-      <div class="flex flex-wrap gap-3">
-        <span class="px-4 py-2 bg-surface-variant/50 border border-outline-variant/20 rounded-full font-label text-xs uppercase tracking-wider">策略諮詢</span>
-        <span class="px-4 py-2 bg-surface-variant/50 border border-outline-variant/20 rounded-full font-label text-xs uppercase tracking-wider">工作流自動化</span>
-        <span class="px-4 py-2 bg-surface-variant/50 border border-outline-variant/20 rounded-full font-label text-xs uppercase tracking-wider">生成式 AI 應用</span>
-        <span class="px-4 py-2 bg-surface-variant/50 border border-outline-variant/20 rounded-full font-label text-xs uppercase tracking-wider">企業培訓</span>
+      <!-- Skills -->
+      <div class="space-y-3 mb-8">
+        <div>
+          <div class="flex justify-between font-mono text-[10px] text-zinc-500 mb-1"><span>生成式 AI 應用</span><span>95%</span></div>
+          <div class="h-px bg-surface-variant/80 rounded-full overflow-hidden">
+            <div class="h-full bg-gradient-to-r from-primary to-primary-dim rounded-full" style="width:95%;box-shadow:0 0 8px #81ecff;"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between font-mono text-[10px] text-zinc-500 mb-1"><span>工作流自動化</span><span>90%</span></div>
+          <div class="h-px bg-surface-variant/80 rounded-full overflow-hidden">
+            <div class="h-full bg-gradient-to-r from-primary to-primary-dim rounded-full" style="width:90%;box-shadow:0 0 8px #81ecff;"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between font-mono text-[10px] text-zinc-500 mb-1"><span>策略規劃與落地</span><span>88%</span></div>
+          <div class="h-px bg-surface-variant/80 rounded-full overflow-hidden">
+            <div class="h-full bg-gradient-to-r from-primary to-primary-dim rounded-full" style="width:88%;box-shadow:0 0 8px #81ecff;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <span class="px-4 py-1.5 bg-surface-variant/40 border border-outline-variant/20 rounded-full font-mono text-[10px] uppercase tracking-wider">策略諮詢</span>
+        <span class="px-4 py-1.5 bg-surface-variant/40 border border-outline-variant/20 rounded-full font-mono text-[10px] uppercase tracking-wider">工作流自動化</span>
+        <span class="px-4 py-1.5 bg-surface-variant/40 border border-outline-variant/20 rounded-full font-mono text-[10px] uppercase tracking-wider">生成式 AI</span>
+        <span class="px-4 py-1.5 bg-surface-variant/40 border border-outline-variant/20 rounded-full font-mono text-[10px] uppercase tracking-wider">企業培訓</span>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- ── 最終 CTA ── -->
+<!-- ══════════════════ CTA ══════════════════ -->
 <section class="py-20 md:py-28 px-6 md:px-8">
-  <div class="max-w-7xl mx-auto">
-    <div class="rounded-3xl bg-gradient-to-br from-primary/15 via-primary/5 to-transparent border border-primary/10 p-10 md:p-20 text-center relative overflow-hidden">
-      <div class="absolute top-0 right-0 w-72 h-72 bg-primary/8 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
-      <div class="absolute bottom-0 left-0 w-56 h-56 bg-primary/5 blur-[80px] rounded-full translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
-      <h2 class="font-headline text-2xl md:text-4xl lg:text-5xl font-bold mb-6 relative z-10 leading-tight">
+  <div class="max-w-7xl mx-auto reveal">
+    <div class="rounded-2xl border border-primary/10 p-10 md:p-20 text-center relative overflow-hidden"
+      style="background:linear-gradient(135deg,rgba(0,200,230,0.05),rgba(0,80,100,0.08),transparent);">
+      <div class="absolute top-0 right-0 w-80 h-80 bg-primary/6 blur-[120px] rounded-full pointer-events-none"></div>
+      <div class="absolute bottom-0 left-0 w-60 h-60 bg-primary/4 blur-[80px] rounded-full pointer-events-none"></div>
+      <h2 class="font-headline text-2xl md:text-4xl lg:text-5xl font-bold mb-4 relative z-10">
         準備好讓 AI 為您提升產出效率嗎？
       </h2>
-      <p class="text-base md:text-lg text-on-surface-variant mb-10 max-w-xl mx-auto relative z-10">
+      <div class="glow-line w-32 mx-auto my-6 relative z-10"></div>
+      <p class="text-base text-on-surface-variant mb-10 max-w-xl mx-auto relative z-10">
         現在就預約諮詢，讓我們聊聊如何將 AI 導入您的日常工作流
       </p>
-      <a href="https://forms.gle/aTzTSBdJBxVNsnoG9" target="_blank"
-        class="inline-block bg-primary text-on-primary-fixed px-10 md:px-14 py-4 md:py-5 rounded-xl font-headline font-bold text-base md:text-xl transition-all hover:shadow-[0_0_40px_rgba(129,236,255,0.45)] hover:scale-105 active:scale-95 relative z-10">
-        立即開始對話
-      </a>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10">
+        <a href="https://forms.gle/aTzTSBdJBxVNsnoG9" target="_blank"
+          class="inline-flex items-center gap-2 bg-gradient-to-r from-primary to-primary-container text-on-primary-fixed px-10 py-4 rounded font-headline font-bold text-base transition-all hover:shadow-[0_0_40px_rgba(129,236,255,0.45)] hover:scale-105 active:scale-95">
+          立即開始對話 <span class="material-symbols-outlined text-base">arrow_forward</span>
+        </a>
+        <div class="flex items-center gap-2 font-mono text-[10px] text-zinc-500 uppercase tracking-widest">
+          <div class="status-dot"></div> ADVISOR_ONLINE_READY
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ── Footer ── -->
-<footer class="border-t border-zinc-800/30 bg-zinc-950">
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer style="background:#000;border-top:1px solid rgba(255,255,255,0.05);">
   <div class="max-w-7xl mx-auto px-6 md:px-8 py-10 flex flex-col md:flex-row justify-between items-center gap-5">
-    <div class="font-label text-[10px] uppercase tracking-[0.25em] text-zinc-500">
-      © 2026 Mike Ma. All rights reserved.
-    </div>
-    <div class="flex gap-8">
+    <div class="font-mono text-[9px] uppercase tracking-[0.3em] text-zinc-600">© 2026 Mike Ma. All rights reserved.</div>
+    <div>
       <a href="https://forms.gle/aTzTSBdJBxVNsnoG9" target="_blank"
-        class="font-label text-[10px] uppercase tracking-[0.25em] text-zinc-500 hover:text-primary transition-all duration-300">
-        聯絡我
-      </a>
+        class="font-mono text-[9px] uppercase tracking-[0.3em] text-zinc-600 hover:text-primary transition-colors">聯絡我</a>
     </div>
-    <div class="text-zinc-600 font-label text-[9px] uppercase tracking-widest">AI 顧問與策略師</div>
+    <div class="font-mono text-[9px] uppercase tracking-widest text-zinc-700 flex items-center gap-2">
+      <span class="status-dot" style="width:5px;height:5px;"></span> AI 顧問與策略師
+    </div>
   </div>
 </footer>
 
+<style>
+@keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+</style>
+
 <script>
-function toggleMenu(){
-  var m=document.getElementById('mobile-menu');
-  m.classList.toggle('open');
+// ── Mobile menu ──
+function toggleMob(){
+  document.getElementById('mob-menu').classList.toggle('open');
 }
-// Close mobile menu on outside click
 document.addEventListener('click',function(e){
-  var nav=document.querySelector('nav');
-  if(!nav.contains(e.target)){
-    document.getElementById('mobile-menu').classList.remove('open');
-  }
+  if(!document.querySelector('nav').contains(e.target))
+    document.getElementById('mob-menu').classList.remove('open');
 });
+
+// ── Neural network canvas ──
+(function(){
+  const canvas=document.getElementById('canvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  let W,H,nodes=[];
+  const N=70,MAX_DIST=130;
+
+  function resize(){
+    W=canvas.offsetWidth;H=canvas.offsetHeight;
+    canvas.width=W*devicePixelRatio;canvas.height=H*devicePixelRatio;
+    ctx.scale(devicePixelRatio,devicePixelRatio);
+  }
+  function initNodes(){
+    nodes=Array.from({length:N},()=>({
+      x:Math.random()*W,y:Math.random()*H,
+      vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,
+      r:Math.random()*1.5+.5,
+    }));
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    // connections
+    for(let i=0;i<nodes.length;i++){
+      for(let j=i+1;j<nodes.length;j++){
+        const dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y;
+        const d=Math.sqrt(dx*dx+dy*dy);
+        if(d<MAX_DIST){
+          const a=(1-d/MAX_DIST)*0.45;
+          ctx.strokeStyle=`rgba(129,236,255,${a})`;
+          ctx.lineWidth=.4;
+          ctx.beginPath();ctx.moveTo(nodes[i].x,nodes[i].y);ctx.lineTo(nodes[j].x,nodes[j].y);ctx.stroke();
+        }
+      }
+    }
+    // nodes
+    nodes.forEach(n=>{
+      ctx.beginPath();ctx.arc(n.x,n.y,n.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(129,236,255,0.75)';
+      ctx.shadowBlur=10;ctx.shadowColor='#81ecff';
+      ctx.fill();ctx.shadowBlur=0;
+      // move
+      n.x+=n.vx;n.y+=n.vy;
+      if(n.x<0||n.x>W)n.vx*=-1;
+      if(n.y<0||n.y>H)n.vy*=-1;
+    });
+    requestAnimationFrame(draw);
+  }
+  resize();initNodes();draw();
+  window.addEventListener('resize',()=>{resize();});
+})();
+
+// ── Scroll reveal ──
+(function(){
+  const els=document.querySelectorAll('.reveal');
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+  },{threshold:.12});
+  els.forEach(el=>io.observe(el));
+})();
 </script>
 </body>
 </html>
