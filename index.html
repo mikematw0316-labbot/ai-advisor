@@ -306,22 +306,24 @@ html{scroll-behavior:smooth;}
         </div>
       </div>
 
-      <!-- Card 3 -->
-      <div class="glass glow-border lift rounded-2xl overflow-hidden reveal reveal-delay-3">
-        <div class="svc-img" style="background:linear-gradient(135deg,#003348,#005570);">
-          <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(129,236,255,0.12),rgba(0,227,253,0.04));"></div>
+      <!-- Card 3 — full-width horizontal -->
+      <div class="glass glow-border lift rounded-2xl overflow-hidden reveal reveal-delay-3 md:col-span-3 flex flex-col md:flex-row">
+        <!-- Left: large image block -->
+        <div class="relative flex-shrink-0 md:w-64 flex items-center justify-center overflow-hidden" style="min-height:200px;background:linear-gradient(135deg,#003348,#005570);">
+          <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(129,236,255,0.15),rgba(0,227,253,0.05));"></div>
           <div class="absolute inset-0" style="background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:28px 28px;"></div>
           <div class="relative z-10 text-center">
-            <span class="material-symbols-outlined text-white text-6xl" style="font-variation-settings:'FILL' 1;opacity:0.9;">build</span>
-            <div class="font-mono text-[9px] text-white/50 tracking-[0.4em] mt-2">CUSTOM DEV</div>
+            <span class="material-symbols-outlined text-white" style="font-size:80px;font-variation-settings:'FILL' 1;opacity:0.9;">build</span>
+            <div class="font-mono text-[9px] text-white/50 tracking-[0.4em] mt-3">CUSTOM DEV</div>
           </div>
           <div class="absolute top-3 right-3">
             <span class="font-mono text-[9px] px-2 py-0.5 rounded uppercase tracking-widest" style="background:rgba(129,236,255,0.2);color:#81ecff;">DEV</span>
           </div>
         </div>
-        <div class="p-7 flex flex-col gap-4">
+        <!-- Right: text content -->
+        <div class="p-7 flex flex-col justify-center gap-4 flex-1">
           <h3 class="font-headline text-xl font-bold" style="color:#ffffff;">個人生產工具開發</h3>
-          <p class="text-on-surface-variant text-sm leading-relaxed">導入 AI 解決細碎繁雜的數位任務。像是開發屬於自己的批次自動化、AI 輔助排版等高價值生產力工具。</p>
+          <p class="text-on-surface-variant text-sm leading-relaxed max-w-xl">導入 AI 解決細碎繁雜的數位任務。像是開發屬於自己的批次自動化、AI 輔助排版等高價值生產力工具。</p>
           <div class="pt-4 border-t border-white/5">
             <div class="flex gap-2 mb-3">
               <span class="font-mono text-[9px] bg-surface-variant/60 text-zinc-400 px-2 py-0.5 rounded uppercase">DEV</span>
