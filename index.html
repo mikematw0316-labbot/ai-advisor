@@ -101,38 +101,36 @@ html{scroll-behavior:smooth;}
 }
 .svc-icon-wrap-orbit .orb-icon{animation:svc-pulse 4s ease-in-out infinite;}
 
-/* Card 3: horizontal scan line */
-@keyframes svc-scan{
-  0%{left:110%;opacity:0;}
-  5%{opacity:1;}
-  95%{opacity:1;}
-  100%{left:-10%;opacity:0;}
+/* Card 3: radar ping */
+@keyframes svc-radar{
+  0%{transform:scale(0.2);opacity:.8;}
+  100%{transform:scale(2.2);opacity:0;}
 }
-.svc-scan-line{
-  position:absolute;top:0;bottom:0;width:2px;
-  background:linear-gradient(180deg,transparent,rgba(129,236,255,0.9),rgba(129,236,255,0.4),transparent);
-  box-shadow:0 0 12px 3px rgba(129,236,255,0.5);
-  animation:svc-scan 2.8s linear infinite;
-  pointer-events:none;z-index:5;
+.svc-radar-wrap{position:relative;display:flex;align-items:center;justify-content:center;}
+.svc-radar-wrap .radar-ring{
+  position:absolute;width:70px;height:70px;border-radius:50%;
+  border:1.5px solid rgba(129,236,255,0.7);
+  animation:svc-radar 2.4s ease-out infinite;
 }
+.svc-radar-wrap .radar-ring:nth-child(2){animation-delay:.8s;}
+.svc-radar-wrap .radar-ring:nth-child(3){animation-delay:1.6s;}
 
-/* CTA glow-line laser */
+/* CTA glow-line laser — stronger */
 @keyframes laser-sweep{
-  0%{left:100%;opacity:0;}
-  5%{opacity:1;}
-  95%{opacity:1;}
-  100%{left:-5%;opacity:0;}
+  0%{left:105%;}
+  100%{left:-25%;}
 }
 .glow-line{
   position:relative;overflow:hidden;
-  background:linear-gradient(90deg,transparent,rgba(129,236,255,0.3),transparent);
-  height:1px;animation:glow-line 3s ease-in-out infinite;
+  background:linear-gradient(90deg,transparent,rgba(129,236,255,0.5),transparent);
+  height:2px;animation:glow-line 3s ease-in-out infinite;
+  box-shadow:0 0 8px rgba(129,236,255,0.4);
 }
 .glow-line::after{
-  content:'';position:absolute;top:-1px;width:20%;height:3px;
-  background:linear-gradient(90deg,transparent,#81ecff,#00e3fd,transparent);
-  box-shadow:0 0 12px 4px rgba(129,236,255,0.8);
-  animation:laser-sweep 2.2s linear infinite;
+  content:'';position:absolute;top:-2px;width:30%;height:6px;
+  background:linear-gradient(90deg,transparent,#00e3fd,#81ecff,#ffffff,#81ecff,transparent);
+  box-shadow:0 0 20px 6px rgba(129,236,255,1),0 0 40px 10px rgba(0,227,253,0.6);
+  animation:laser-sweep 1.8s linear infinite;
 }
 
 /* Scan-line overlay */
@@ -258,17 +256,17 @@ html{scroll-behavior:smooth;}
         </h1>
 
         <p class="text-on-surface-variant text-base md:text-lg leading-relaxed max-w-lg mb-10">
-          讓 AI 真正成為你的工作夥伴。透過深度技術整合與策略佈署，釋放組織的數位潛能。
+          讓 AI 真正成為你的工作夥伴；透過運用 AI 整合技術與策略佈署，釋放你或組織的數位潛能。
         </p>
 
         <div class="flex flex-col sm:flex-row gap-4">
           <a href="https://forms.gle/aTzTSBdJBxVNsnoG9" target="_blank"
             class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary-fixed rounded font-headline font-bold text-sm transition-all hover:scale-105 hover:shadow-[0_0_32px_rgba(129,236,255,0.4)]">
-            立即諮詢 AI 導入 <span class="material-symbols-outlined text-base">arrow_forward</span>
+            立即諮詢 <span class="material-symbols-outlined text-base">arrow_forward</span>
           </a>
           <a href="#lab"
             class="inline-flex items-center justify-center gap-2 px-8 py-4 border border-primary/25 text-primary rounded font-headline font-bold text-sm hover:bg-primary/5 hover:border-primary/50 transition-all">
-            探索 AI 工具箱
+            探索實際產出 AI 內容
           </a>
         </div>
 
@@ -389,9 +387,13 @@ html{scroll-behavior:smooth;}
         <div class="relative flex-shrink-0 md:w-64 flex items-center justify-center overflow-hidden" style="min-height:200px;background:linear-gradient(135deg,#003348,#005570);">
           <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(129,236,255,0.15),rgba(0,227,253,0.05));"></div>
           <div class="absolute inset-0" style="background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:28px 28px;"></div>
-          <div class="svc-scan-line"></div>
           <div class="relative z-10 text-center">
-            <span class="material-symbols-outlined text-white" style="font-size:80px;font-variation-settings:'FILL' 1;opacity:0.9;">build</span>
+            <div class="svc-radar-wrap mb-2">
+              <div class="radar-ring"></div>
+              <div class="radar-ring"></div>
+              <div class="radar-ring"></div>
+              <span class="material-symbols-outlined text-white relative z-10" style="font-size:64px;font-variation-settings:'FILL' 1;opacity:0.95;text-shadow:0 0 24px rgba(129,236,255,0.7);">build</span>
+            </div>
             <div class="font-mono text-[9px] text-white/50 tracking-[0.4em] mt-3">CUSTOM DEV</div>
           </div>
           <div class="absolute top-3 right-3">
@@ -427,8 +429,8 @@ html{scroll-behavior:smooth;}
     <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-4 reveal">
       <div>
         <p class="font-mono text-[10px] text-primary/50 tracking-[0.5em] uppercase mb-3">AI TOOL LAB</p>
-        <h2 class="font-headline text-3xl md:text-4xl font-bold text-white">實戰 AI 工具箱</h2>
-        <p class="text-on-surface-variant text-sm mt-3 max-w-md">精選 AI 應用工具，可直接使用，零門檻體驗生產力升級</p>
+        <h2 class="font-headline text-3xl md:text-4xl font-bold text-white">探索實際產出 AI 內容</h2>
+        <p class="text-on-surface-variant text-sm mt-3 max-w-xl">此區產出皆為實際運用 AI 產出的落地應用或開發內容，透過導入或學習 AI，你也可以不用寫程式就做出提高生產力或自身價值的專屬內容。</p>
       </div>
       <p class="font-mono text-[9px] text-zinc-600 tracking-widest uppercase text-right max-w-[180px] leading-loose hidden md:block">
         LIVE TOOLS<br>BUILT &amp; DEPLOYED
@@ -532,7 +534,7 @@ html{scroll-behavior:smooth;}
           class="lab-card group">
           <div class="lab-icon"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">swords</span></div>
           <div class="flex-1">
-            <h4 class="font-headline font-bold text-sm text-white mb-1">地城魔王反攻</h4>
+            <h4 class="font-headline font-bold text-sm text-white mb-1">地城魔王反攻：終結英雄傳說</h4>
             <p class="text-on-surface-variant text-[11px] leading-relaxed">D&D 骰子引擎驅動，挑戰英雄、征服地城，全球排行榜對決</p>
           </div>
           <span class="font-mono text-[10px] text-primary group-hover:text-primary-container transition-colors mt-1 block">立即體驗 →</span>
