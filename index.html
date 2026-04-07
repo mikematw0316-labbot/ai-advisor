@@ -66,15 +66,11 @@ html{scroll-behavior:smooth;}
   color:#81ecff;font-size:22px;flex-shrink:0;
 }
 
-/* Service card image area animations */
-@keyframes svc-pulse{
-  0%,100%{transform:scale(1);opacity:.85;}
-  50%{transform:scale(1.12);opacity:1;}
-}
-@keyframes svc-ring{
-  0%{transform:scale(.7);opacity:.5;}
-  100%{transform:scale(1.6);opacity:0;}
-}
+/* ── Service card image area animations ── */
+
+/* Card 1: expanding pulse rings */
+@keyframes svc-pulse{0%,100%{transform:scale(1);opacity:.85;}50%{transform:scale(1.1);opacity:1;}}
+@keyframes svc-ring{0%{transform:scale(.7);opacity:.55;}100%{transform:scale(1.7);opacity:0;}}
 .svc-icon-wrap{position:relative;display:flex;align-items:center;justify-content:center;}
 .svc-icon-wrap .ring{
   position:absolute;width:80px;height:80px;border-radius:50%;
@@ -83,6 +79,61 @@ html{scroll-behavior:smooth;}
 }
 .svc-icon-wrap .ring2{animation-delay:1.2s;}
 .svc-icon-wrap .ico{animation:svc-pulse 3s ease-in-out infinite;}
+
+/* Card 2: spinning orbit ring */
+@keyframes svc-orbit{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+@keyframes svc-orbit-rev{from{transform:rotate(0deg);}to{transform:rotate(-360deg);}}
+.svc-icon-wrap-orbit{position:relative;display:flex;align-items:center;justify-content:center;width:90px;height:90px;}
+.svc-icon-wrap-orbit .orb-ring{
+  position:absolute;inset:0;border-radius:50%;
+  border:1px dashed rgba(129,236,255,0.45);
+  animation:svc-orbit 4s linear infinite;
+}
+.svc-icon-wrap-orbit .orb-ring::after{
+  content:'';position:absolute;top:-3px;left:50%;transform:translateX(-50%);
+  width:6px;height:6px;border-radius:50%;
+  background:#81ecff;box-shadow:0 0 8px #81ecff,0 0 16px #81ecff;
+}
+.svc-icon-wrap-orbit .orb-ring2{
+  position:absolute;inset:8px;border-radius:50%;
+  border:1px solid rgba(129,236,255,0.2);
+  animation:svc-orbit-rev 6s linear infinite;
+}
+.svc-icon-wrap-orbit .orb-icon{animation:svc-pulse 4s ease-in-out infinite;}
+
+/* Card 3: horizontal scan line */
+@keyframes svc-scan{
+  0%{left:110%;opacity:0;}
+  5%{opacity:1;}
+  95%{opacity:1;}
+  100%{left:-10%;opacity:0;}
+}
+.svc-scan-line{
+  position:absolute;top:0;bottom:0;width:2px;
+  background:linear-gradient(180deg,transparent,rgba(129,236,255,0.9),rgba(129,236,255,0.4),transparent);
+  box-shadow:0 0 12px 3px rgba(129,236,255,0.5);
+  animation:svc-scan 2.8s linear infinite;
+  pointer-events:none;z-index:5;
+}
+
+/* CTA glow-line laser */
+@keyframes laser-sweep{
+  0%{left:100%;opacity:0;}
+  5%{opacity:1;}
+  95%{opacity:1;}
+  100%{left:-5%;opacity:0;}
+}
+.glow-line{
+  position:relative;overflow:hidden;
+  background:linear-gradient(90deg,transparent,rgba(129,236,255,0.3),transparent);
+  height:1px;animation:glow-line 3s ease-in-out infinite;
+}
+.glow-line::after{
+  content:'';position:absolute;top:-1px;width:20%;height:3px;
+  background:linear-gradient(90deg,transparent,#81ecff,#00e3fd,transparent);
+  box-shadow:0 0 12px 4px rgba(129,236,255,0.8);
+  animation:laser-sweep 2.2s linear infinite;
+}
 
 /* Scan-line overlay */
 .scanlines::after{
@@ -306,9 +357,10 @@ html{scroll-behavior:smooth;}
           <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(129,236,255,0.12),rgba(0,227,253,0.04));"></div>
           <div class="absolute inset-0" style="background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:28px 28px;"></div>
           <div class="relative z-10 text-center">
-            <div class="svc-icon-wrap mb-2">
-              <div class="ring"></div><div class="ring ring2"></div>
-              <span class="material-symbols-outlined text-white text-6xl ico" style="font-variation-settings:'FILL' 1;">school</span>
+            <div class="svc-icon-wrap-orbit mx-auto mb-2">
+              <div class="orb-ring"></div>
+              <div class="orb-ring2"></div>
+              <span class="material-symbols-outlined text-white text-5xl orb-icon" style="font-variation-settings:'FILL' 1;">school</span>
             </div>
             <div class="font-mono text-[9px] text-white/50 tracking-[0.4em] mt-2">AI TRAINING</div>
           </div>
@@ -337,6 +389,7 @@ html{scroll-behavior:smooth;}
         <div class="relative flex-shrink-0 md:w-64 flex items-center justify-center overflow-hidden" style="min-height:200px;background:linear-gradient(135deg,#003348,#005570);">
           <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(129,236,255,0.15),rgba(0,227,253,0.05));"></div>
           <div class="absolute inset-0" style="background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:28px 28px;"></div>
+          <div class="svc-scan-line"></div>
           <div class="relative z-10 text-center">
             <span class="material-symbols-outlined text-white" style="font-size:80px;font-variation-settings:'FILL' 1;opacity:0.9;">build</span>
             <div class="font-mono text-[9px] text-white/50 tracking-[0.4em] mt-3">CUSTOM DEV</div>
