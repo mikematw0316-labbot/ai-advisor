@@ -46,9 +46,9 @@ html{scroll-behavior:smooth;}
 .text-glow{text-shadow:0 0 28px rgba(129,236,255,0.5);}
 .text-glow-sm{text-shadow:0 0 14px rgba(129,236,255,0.4);}
 
-/* Lab tool card */
+/* Lab tool card — horizontal layout */
 .lab-card{
-  display:flex;flex-direction:column;gap:10px;padding:20px;border-radius:12px;
+  display:flex;flex-direction:row;align-items:center;gap:14px;padding:16px 20px;border-radius:12px;
   background:rgba(20,26,29,0.6);
   border:1px solid rgba(129,236,255,0.07);
   backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
@@ -60,11 +60,29 @@ html{scroll-behavior:smooth;}
   box-shadow:0 8px 32px rgba(129,236,255,0.06);
 }
 .lab-icon{
-  width:36px;height:36px;border-radius:8px;
-  background:rgba(129,236,255,0.08);
+  width:44px;height:44px;border-radius:10px;
+  background:rgba(129,236,255,0.1);
   display:flex;align-items:center;justify-content:center;
-  color:#81ecff;font-size:18px;flex-shrink:0;
+  color:#81ecff;font-size:22px;flex-shrink:0;
 }
+
+/* Service card image area animations */
+@keyframes svc-pulse{
+  0%,100%{transform:scale(1);opacity:.85;}
+  50%{transform:scale(1.12);opacity:1;}
+}
+@keyframes svc-ring{
+  0%{transform:scale(.7);opacity:.5;}
+  100%{transform:scale(1.6);opacity:0;}
+}
+.svc-icon-wrap{position:relative;display:flex;align-items:center;justify-content:center;}
+.svc-icon-wrap .ring{
+  position:absolute;width:80px;height:80px;border-radius:50%;
+  border:1px solid rgba(129,236,255,0.5);
+  animation:svc-ring 2.4s ease-out infinite;
+}
+.svc-icon-wrap .ring2{animation-delay:1.2s;}
+.svc-icon-wrap .ico{animation:svc-pulse 3s ease-in-out infinite;}
 
 /* Scan-line overlay */
 .scanlines::after{
@@ -257,7 +275,10 @@ html{scroll-behavior:smooth;}
           <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(129,236,255,0.15),rgba(0,227,253,0.05));"></div>
           <div class="absolute inset-0" style="background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:28px 28px;"></div>
           <div class="relative z-10 text-center">
-            <span class="material-symbols-outlined text-white text-6xl" style="font-variation-settings:'FILL' 1;opacity:0.9;">hub</span>
+            <div class="svc-icon-wrap mb-2">
+              <div class="ring"></div><div class="ring ring2"></div>
+              <span class="material-symbols-outlined text-white text-6xl ico" style="font-variation-settings:'FILL' 1;">hub</span>
+            </div>
             <div class="font-mono text-[9px] text-white/50 tracking-[0.4em] mt-2">AI CONSULTING</div>
           </div>
           <div class="absolute top-3 right-3">
@@ -285,7 +306,10 @@ html{scroll-behavior:smooth;}
           <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(129,236,255,0.12),rgba(0,227,253,0.04));"></div>
           <div class="absolute inset-0" style="background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:28px 28px;"></div>
           <div class="relative z-10 text-center">
-            <span class="material-symbols-outlined text-white text-6xl" style="font-variation-settings:'FILL' 1;opacity:0.9;">school</span>
+            <div class="svc-icon-wrap mb-2">
+              <div class="ring"></div><div class="ring ring2"></div>
+              <span class="material-symbols-outlined text-white text-6xl ico" style="font-variation-settings:'FILL' 1;">school</span>
+            </div>
             <div class="font-mono text-[9px] text-white/50 tracking-[0.4em] mt-2">AI TRAINING</div>
           </div>
           <div class="absolute top-3 right-3">
@@ -375,10 +399,7 @@ html{scroll-behavior:smooth;}
             <h4 class="font-headline font-bold text-sm text-white mb-1">LinkedIn 履歷職涯推手</h4>
             <p class="text-on-surface-variant text-[11px] leading-relaxed">上傳 PDF，AI 深度重構職涯敘事，強化個人競爭力</p>
           </div>
-          <div class="flex items-center justify-between mt-3 pt-3 border-t border-white/5">
-            <span class="font-mono text-[10px] text-primary group-hover:text-primary-container transition-colors">立即體驗 →</span>
-            <span class="material-symbols-outlined text-xs text-zinc-600 group-hover:text-primary transition-colors">open_in_new</span>
-          </div>
+          <span class="font-mono text-[10px] text-primary group-hover:text-primary-container transition-colors mt-1 block">立即體驗 →</span>
         </a>
 
         <a href="https://ai.studio/apps/drive/1b-l0IlkS9TJlxHFO5fHBE1dXf75XoCJR?fullscreenApplet=true" target="_blank"
@@ -388,10 +409,7 @@ html{scroll-behavior:smooth;}
             <h4 class="font-headline font-bold text-sm text-white mb-1">AI 文字轉語音</h4>
             <p class="text-on-surface-variant text-[11px] leading-relaxed">輸入文字，自動生成自然中文語音，多種語調可選</p>
           </div>
-          <div class="flex items-center justify-between mt-3 pt-3 border-t border-white/5">
-            <span class="font-mono text-[10px] text-primary group-hover:text-primary-container transition-colors">立即體驗 →</span>
-            <span class="material-symbols-outlined text-xs text-zinc-600 group-hover:text-primary transition-colors">open_in_new</span>
-          </div>
+          <span class="font-mono text-[10px] text-primary group-hover:text-primary-container transition-colors mt-1 block">立即體驗 →</span>
         </a>
 
         <a href="https://ai.studio/apps/drive/1nT9hR08z-Aayu-glchcI_eVFJgX1I1rT?fullscreenApplet=true" target="_blank"
@@ -401,10 +419,7 @@ html{scroll-behavior:smooth;}
             <h4 class="font-headline font-bold text-sm text-white mb-1">圖片批次尺寸再製</h4>
             <p class="text-on-surface-variant text-[11px] leading-relaxed">主體智慧識別、自動裁切，批次輸出各平台所需比例</p>
           </div>
-          <div class="flex items-center justify-between mt-3 pt-3 border-t border-white/5">
-            <span class="font-mono text-[10px] text-primary group-hover:text-primary-container transition-colors">立即體驗 →</span>
-            <span class="material-symbols-outlined text-xs text-zinc-600 group-hover:text-primary transition-colors">open_in_new</span>
-          </div>
+          <span class="font-mono text-[10px] text-primary group-hover:text-primary-container transition-colors mt-1 block">立即體驗 →</span>
         </a>
 
         <a href="https://ai.studio/apps/drive/1mVoqT21wIQeiZIgaYdOyHxT6nssg5BaB?fullscreenApplet=true" target="_blank"
@@ -414,10 +429,7 @@ html{scroll-behavior:smooth;}
             <h4 class="font-headline font-bold text-sm text-white mb-1">圖片智慧標籤生成</h4>
             <p class="text-on-surface-variant text-[11px] leading-relaxed">批次分析圖庫，自動產生精準 SEO 標籤，提升曝光效率</p>
           </div>
-          <div class="flex items-center justify-between mt-3 pt-3 border-t border-white/5">
-            <span class="font-mono text-[10px] text-primary group-hover:text-primary-container transition-colors">立即體驗 →</span>
-            <span class="material-symbols-outlined text-xs text-zinc-600 group-hover:text-primary transition-colors">open_in_new</span>
-          </div>
+          <span class="font-mono text-[10px] text-primary group-hover:text-primary-container transition-colors mt-1 block">立即體驗 →</span>
         </a>
 
       </div>
@@ -440,10 +452,7 @@ html{scroll-behavior:smooth;}
             <h4 class="font-headline font-bold text-sm text-white mb-1">Excel 圖片批次下載器</h4>
             <p class="text-on-surface-variant text-[11px] leading-relaxed">拖曳 Excel 檔案，自動擷取表內所有圖片連結並批次下載</p>
           </div>
-          <div class="flex items-center justify-between mt-3 pt-3 border-t border-white/5">
-            <span class="font-mono text-[10px] text-primary group-hover:text-primary-container transition-colors">立即體驗 →</span>
-            <span class="material-symbols-outlined text-xs text-zinc-600 group-hover:text-primary transition-colors">open_in_new</span>
-          </div>
+          <span class="font-mono text-[10px] text-primary group-hover:text-primary-container transition-colors mt-1 block">立即體驗 →</span>
         </a>
 
         <a href="https://mikematw0316-labbot.github.io/carousel-tool/" target="_blank"
@@ -453,10 +462,7 @@ html{scroll-behavior:smooth;}
             <h4 class="font-headline font-bold text-sm text-white mb-1">FB / IG 社群製圖神器</h4>
             <p class="text-on-surface-variant text-[11px] leading-relaxed">一鍵套版、智慧排版，快速生成社群貼文視覺素材</p>
           </div>
-          <div class="flex items-center justify-between mt-3 pt-3 border-t border-white/5">
-            <span class="font-mono text-[10px] text-primary group-hover:text-primary-container transition-colors">立即體驗 →</span>
-            <span class="material-symbols-outlined text-xs text-zinc-600 group-hover:text-primary transition-colors">open_in_new</span>
-          </div>
+          <span class="font-mono text-[10px] text-primary group-hover:text-primary-container transition-colors mt-1 block">立即體驗 →</span>
         </a>
 
         <a href="https://mikematw0316-labbot.github.io/territory-game/" target="_blank"
@@ -466,10 +472,7 @@ html{scroll-behavior:smooth;}
             <h4 class="font-headline font-bold text-sm text-white mb-1">佔地風雲：多人對決</h4>
             <p class="text-on-surface-variant text-[11px] leading-relaxed">即時多人預測競技，搶佔領地，最強策略者制霸全場</p>
           </div>
-          <div class="flex items-center justify-between mt-3 pt-3 border-t border-white/5">
-            <span class="font-mono text-[10px] text-primary group-hover:text-primary-container transition-colors">立即體驗 →</span>
-            <span class="material-symbols-outlined text-xs text-zinc-600 group-hover:text-primary transition-colors">open_in_new</span>
-          </div>
+          <span class="font-mono text-[10px] text-primary group-hover:text-primary-container transition-colors mt-1 block">立即體驗 →</span>
         </a>
 
         <a href="https://dungeon-react-production.up.railway.app" target="_blank"
@@ -479,10 +482,7 @@ html{scroll-behavior:smooth;}
             <h4 class="font-headline font-bold text-sm text-white mb-1">地城魔王反攻</h4>
             <p class="text-on-surface-variant text-[11px] leading-relaxed">D&D 骰子引擎驅動，挑戰英雄、征服地城，全球排行榜對決</p>
           </div>
-          <div class="flex items-center justify-between mt-3 pt-3 border-t border-white/5">
-            <span class="font-mono text-[10px] text-primary group-hover:text-primary-container transition-colors">立即體驗 →</span>
-            <span class="material-symbols-outlined text-xs text-zinc-600 group-hover:text-primary transition-colors">open_in_new</span>
-          </div>
+          <span class="font-mono text-[10px] text-primary group-hover:text-primary-container transition-colors mt-1 block">立即體驗 →</span>
         </a>
 
       </div>
