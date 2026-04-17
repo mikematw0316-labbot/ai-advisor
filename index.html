@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>麥克馬 Mike Ma｜AI 顧問與策略師</title>
 <meta name="description" content="專為個人與企業量身打造可落地的 AI 應用教學與自動化解決方案">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F2Z60V2JB6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-F2Z60V2JB6');
+</script>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
@@ -222,10 +230,10 @@ html{scroll-behavior:smooth;}
       <span class="text-primary text-glow-sm">◈</span> Mike Ma
     </div>
     <div class="flex items-center gap-6">
-      <a href="#services" id="nav-services" class="nav-link font-mono text-[11px] uppercase tracking-widest text-zinc-400 hover:text-primary pb-0.5 transition-colors">服務諮詢</a>
-      <a href="#lab"      id="nav-lab"      class="nav-link font-mono text-[11px] uppercase tracking-widest text-zinc-400 hover:text-primary pb-0.5 transition-colors">AI 實驗室</a>
+      <a href="#services" id="nav-services" onclick="gtag('event','上方置頂_服務諮詢')" class="nav-link font-mono text-[11px] uppercase tracking-widest text-zinc-400 hover:text-primary pb-0.5 transition-colors">服務諮詢</a>
+      <a href="#lab"      id="nav-lab"      onclick="gtag('event','上方置頂_AI實驗室')" class="nav-link font-mono text-[11px] uppercase tracking-widest text-zinc-400 hover:text-primary pb-0.5 transition-colors">AI 實驗室</a>
     </div>
-    <a href="https://forms.gle/aTzTSBdJBxVNsnoG9" target="_blank"
+    <a href="https://forms.gle/aTzTSBdJBxVNsnoG9" target="_blank" onclick="gtag('event','上方置頂_聯繫')"
       class="bg-gradient-to-r from-primary to-primary-container text-on-primary-fixed px-5 py-2 rounded font-mono text-[11px] font-bold tracking-widest uppercase transition-all hover:shadow-[0_0_24px_rgba(129,236,255,0.5)] active:scale-95">
       聯繫
     </a>
@@ -258,11 +266,11 @@ html{scroll-behavior:smooth;}
         </p>
 
         <div class="flex flex-col sm:flex-row gap-4">
-          <a href="https://forms.gle/aTzTSBdJBxVNsnoG9" target="_blank"
+          <a href="https://forms.gle/aTzTSBdJBxVNsnoG9" target="_blank" onclick="gtag('event','第一區塊_立即諮詢')"
             class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary-fixed rounded font-headline font-bold text-sm transition-all hover:scale-105 hover:shadow-[0_0_32px_rgba(129,236,255,0.4)]">
             立即諮詢 <span class="material-symbols-outlined text-base">arrow_forward</span>
           </a>
-          <a href="#lab"
+          <a href="#lab" onclick="gtag('event','第一區塊_探索實際產出AI內容')"
             class="inline-flex items-center justify-center gap-2 px-8 py-4 border border-primary/25 text-primary rounded font-headline font-bold text-sm hover:bg-primary/5 hover:border-primary/50 transition-all">
             探索實際產出 AI 內容
           </a>
@@ -317,7 +325,7 @@ html{scroll-behavior:smooth;}
     <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
 
       <!-- Card 1 -->
-      <a href="https://forms.gle/aTzTSBdJBxVNsnoG9" target="_blank" class="glass glow-border lift rounded-2xl overflow-hidden reveal reveal-delay-1 block">
+      <a href="https://forms.gle/aTzTSBdJBxVNsnoG9" target="_blank" onclick="gtag('event','服務資訊_企業AI導入諮詢')" class="glass glow-border lift rounded-2xl overflow-hidden reveal reveal-delay-1 block">
         <div class="svc-img" style="background:linear-gradient(135deg,#003d4d,#006080);">
           <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(129,236,255,0.15),rgba(0,227,253,0.05));"></div>
           <div class="absolute inset-0" style="background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:28px 28px;"></div>
@@ -348,7 +356,7 @@ html{scroll-behavior:smooth;}
       </a>
 
       <!-- Card 2 -->
-      <a href="https://forms.gle/aTzTSBdJBxVNsnoG9" target="_blank" class="glass glow-border lift rounded-2xl overflow-hidden reveal reveal-delay-2 block">
+      <a href="https://forms.gle/aTzTSBdJBxVNsnoG9" target="_blank" onclick="gtag('event','服務資訊_專業AI培訓課程')" class="glass glow-border lift rounded-2xl overflow-hidden reveal reveal-delay-2 block">
         <div class="svc-img" style="background:linear-gradient(135deg,#004055,#007090);">
           <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(129,236,255,0.12),rgba(0,227,253,0.04));"></div>
           <div class="absolute inset-0" style="background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:28px 28px;"></div>
@@ -380,7 +388,7 @@ html{scroll-behavior:smooth;}
       </a>
 
       <!-- Card 3 -->
-      <a href="https://forms.gle/aTzTSBdJBxVNsnoG9" target="_blank" class="glass glow-border lift rounded-2xl overflow-hidden reveal reveal-delay-3 block">
+      <a href="https://forms.gle/aTzTSBdJBxVNsnoG9" target="_blank" onclick="gtag('event','服務資訊_個人生產工具開發')" class="glass glow-border lift rounded-2xl overflow-hidden reveal reveal-delay-3 block">
         <div class="svc-img" style="background:linear-gradient(135deg,#003348,#005570);">
           <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(129,236,255,0.15),rgba(0,227,253,0.05));"></div>
           <div class="absolute inset-0" style="background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:28px 28px;"></div>
@@ -614,7 +622,7 @@ html{scroll-behavior:smooth;}
         現在就預約諮詢，讓我們聊聊如何將 AI 導入您的日常工作流
       </p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10">
-        <a href="https://forms.gle/aTzTSBdJBxVNsnoG9" target="_blank"
+        <a href="https://forms.gle/aTzTSBdJBxVNsnoG9" target="_blank" onclick="gtag('event','預約資訊_立即開始對話')"
           class="inline-flex items-center gap-2 bg-gradient-to-r from-primary to-primary-container text-on-primary-fixed px-10 py-4 rounded font-headline font-bold text-base transition-all hover:shadow-[0_0_40px_rgba(129,236,255,0.45)] hover:scale-105 active:scale-95">
           立即開始對話 <span class="material-symbols-outlined text-base">arrow_forward</span>
         </a>
@@ -641,6 +649,14 @@ html{scroll-behavior:smooth;}
 </style>
 
 <script>
+// ── Lab card GA events ──
+document.querySelectorAll('#lab .lab-card').forEach(function(card){
+  card.addEventListener('click', function(){
+    var title = (card.querySelector('h4') || {}).textContent || '';
+    gtag('event', 'AI研究室_' + title.trim());
+  });
+});
+
 // ── Nav active state on scroll ──
 (function(){
   const links = {
