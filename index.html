@@ -204,9 +204,6 @@ html{scroll-behavior:smooth;}
   background:#050a0c;
 }
 
-/* Mobile menu */
-#mob-menu{display:none;}
-#mob-menu.open{display:flex;}
 
 /* Noise overlay */
 .noise::before{
@@ -224,23 +221,14 @@ html{scroll-behavior:smooth;}
     <div class="font-headline text-lg font-bold text-white tracking-tighter flex items-center gap-2">
       <span class="text-primary text-glow-sm">◈</span> Mike Ma
     </div>
-    <div class="hidden md:flex items-center gap-10">
+    <div class="flex items-center gap-6">
       <a href="#services" class="font-mono text-[11px] uppercase tracking-widest text-primary border-b border-primary/30 hover:border-primary pb-0.5 transition-colors">服務諮詢</a>
       <a href="#lab"      class="font-mono text-[11px] uppercase tracking-widest text-zinc-400 hover:text-primary transition-colors">AI 實驗室</a>
     </div>
-    <div class="flex items-center gap-3">
-      <a href="https://forms.gle/aTzTSBdJBxVNsnoG9" target="_blank"
-        class="bg-gradient-to-r from-primary to-primary-container text-on-primary-fixed px-5 py-2 rounded font-mono text-[11px] font-bold tracking-widest uppercase transition-all hover:shadow-[0_0_24px_rgba(129,236,255,0.5)] active:scale-95">
-        聯繫
-      </a>
-      <button onclick="toggleMob()" class="md:hidden text-zinc-400 hover:text-primary">
-        <span class="material-symbols-outlined">menu</span>
-      </button>
-    </div>
-  </div>
-  <div id="mob-menu" class="flex-col px-5 pb-4 md:hidden border-t border-white/5">
-    <a href="#services" onclick="toggleMob()" class="block py-3 font-mono text-sm text-on-surface-variant hover:text-primary transition-colors">服務諮詢</a>
-    <a href="#lab"      onclick="toggleMob()" class="block py-3 font-mono text-sm text-on-surface-variant hover:text-primary transition-colors">AI 實驗室</a>
+    <a href="https://forms.gle/aTzTSBdJBxVNsnoG9" target="_blank"
+      class="bg-gradient-to-r from-primary to-primary-container text-on-primary-fixed px-5 py-2 rounded font-mono text-[11px] font-bold tracking-widest uppercase transition-all hover:shadow-[0_0_24px_rgba(129,236,255,0.5)] active:scale-95">
+      聯繫
+    </a>
   </div>
 </nav>
 
@@ -653,15 +641,6 @@ html{scroll-behavior:smooth;}
 </style>
 
 <script>
-// ── Mobile menu ──
-function toggleMob(){
-  document.getElementById('mob-menu').classList.toggle('open');
-}
-document.addEventListener('click',function(e){
-  if(!document.querySelector('nav').contains(e.target))
-    document.getElementById('mob-menu').classList.remove('open');
-});
-
 // ── Neural network canvas ──
 (function(){
   const canvas=document.getElementById('canvas');
