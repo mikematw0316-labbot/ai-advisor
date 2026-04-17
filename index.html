@@ -222,8 +222,8 @@ html{scroll-behavior:smooth;}
       <span class="text-primary text-glow-sm">◈</span> Mike Ma
     </div>
     <div class="flex items-center gap-6">
-      <a href="#services" class="font-mono text-[11px] uppercase tracking-widest text-primary border-b border-primary/30 hover:border-primary pb-0.5 transition-colors">服務諮詢</a>
-      <a href="#lab"      class="font-mono text-[11px] uppercase tracking-widest text-zinc-400 hover:text-primary transition-colors">AI 實驗室</a>
+      <a href="#services" id="nav-services" class="nav-link font-mono text-[11px] uppercase tracking-widest text-zinc-400 hover:text-primary pb-0.5 transition-colors">服務諮詢</a>
+      <a href="#lab"      id="nav-lab"      class="nav-link font-mono text-[11px] uppercase tracking-widest text-zinc-400 hover:text-primary pb-0.5 transition-colors">AI 實驗室</a>
     </div>
     <a href="https://forms.gle/aTzTSBdJBxVNsnoG9" target="_blank"
       class="bg-gradient-to-r from-primary to-primary-container text-on-primary-fixed px-5 py-2 rounded font-mono text-[11px] font-bold tracking-widest uppercase transition-all hover:shadow-[0_0_24px_rgba(129,236,255,0.5)] active:scale-95">
@@ -641,6 +641,30 @@ html{scroll-behavior:smooth;}
 </style>
 
 <script>
+// ── Nav active state on scroll ──
+(function(){
+  const links = {
+    'nav-services': document.getElementById('services'),
+    'nav-lab':      document.getElementById('lab'),
+  };
+  function update(){
+    const scrollY = window.scrollY + 80;
+    let active = null;
+    for(const [id, sec] of Object.entries(links)){
+      if(sec && sec.offsetTop <= scrollY) active = id;
+    }
+    document.querySelectorAll('.nav-link').forEach(a => {
+      const on = a.id === active;
+      a.classList.toggle('text-primary', on);
+      a.classList.toggle('border-b', on);
+      a.classList.toggle('border-primary/30', on);
+      a.classList.toggle('text-zinc-400', !on);
+    });
+  }
+  window.addEventListener('scroll', update, {passive:true});
+  update();
+})();
+
 // ── Neural network canvas ──
 (function(){
   const canvas=document.getElementById('canvas');
